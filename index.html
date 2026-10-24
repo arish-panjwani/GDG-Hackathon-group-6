@@ -1,0 +1,1191 @@
+<title>Esther Newcomer Guide</title>
+<meta name="claude:viewport-fit-sides" content="cover">
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Lato:wght@700&family=Noto+Sans:wght@400;700&display=swap">
+<style>
+/* Layout: Canada.ca-style service page — navy header band with red rule, one-question onboarding cards, then phased icon tiles, detail sheet and ask bar. Single light theme by choice (government service convention), plus a high-contrast mode. */
+:root{
+  --navy:#26374A; --blue:#2B4380; --red:#AF3C43; --bg:#FFFFFF; --alt:#F1F2F3; --soft:#E6EDF4;
+  --fg:#333333; --muted:#595959; --line:#C9CED4; --edge:#949494; --done:#278400; --warn:#FBE3C8; --warn-edge:#EE7100;
+  --focus:#0535D2; --on:#FFFFFF; --scrim:rgba(0,0,0,.5); --s:1; --band:#26374A; --city:#00747A;
+  --display:"Lato","Helvetica Neue",Arial,sans-serif; --body:"Noto Sans","Helvetica Neue",Arial,sans-serif;
+  color-scheme:light;
+}
+html{font-size:calc(16px * var(--s))}
+html.ts-1{--s:1.15} html.ts-2{--s:1.3}
+html.hc{--navy:#000;--blue:#00007A;--red:#000;--bg:#FFF;--alt:#FFF;--soft:#FFF;--fg:#000;--muted:#000;--line:#000;--edge:#000;--done:#005700;--warn:#FFF;--warn-edge:#000}
+html.hc .tile,html.hc .choice,html.hc .num,html.hc .hcard,html.hc .detected,html.hc .opt{border-width:2px}
+html.dark{--navy:#C3D5EA;--blue:#9DC3F2;--red:#EC8D93;--bg:#10171E;--alt:#18222C;--soft:#21303F;--fg:#ECEFF2;--muted:#B6BFC8;--line:#384554;--edge:#6E7B89;--done:#62BA4F;--warn:#3A2913;--warn-edge:#F0A35C;--focus:#9DBBFF;--on:#0F1A25;--band:#0C1D2F;--scrim:rgba(0,0,0,.65);color-scheme:dark}
+html.dark.hc{--navy:#FFF;--blue:#9CF;--red:#FFF;--bg:#000;--alt:#000;--soft:#000;--fg:#FFF;--muted:#FFF;--line:#FFF;--edge:#FFF;--on:#000;--band:#000}
+html.ul a{text-decoration:underline}
+*{box-sizing:border-box}
+body{background:var(--bg);color:var(--fg);font-family:var(--body);font-size:1.125rem;line-height:1.55;margin:0;padding-block:0 8.5rem}
+body.onb{padding-block:0 2rem}
+.gut{padding-left:max(16px,env(safe-area-inset-left,0px));padding-right:max(16px,env(safe-area-inset-right,0px))}
+:focus-visible{outline:3px solid var(--focus);outline-offset:2px}
+a{color:var(--blue)}
+.vh{position:absolute;width:1px;height:1px;overflow:hidden;clip:rect(0 0 0 0);white-space:nowrap}
+.skip{position:absolute;left:-999px;top:0;z-index:50;background:var(--band);color:#fff;padding:.75rem 1rem;font-weight:700}
+.skip:focus{left:max(16px,env(safe-area-inset-left,0px));top:calc(8px + env(safe-area-inset-top,0px))}
+/* header band */
+body::before{content:"";position:fixed;inset:0 0 auto;height:env(safe-area-inset-top,0px);z-index:10;background:var(--band)}
+.band{background:var(--band);color:#fff;border-bottom:4px solid var(--red)}
+.band .in{max-width:1040px;margin:0 auto;display:flex;flex-wrap:wrap;align-items:center;justify-content:space-between;gap:.5rem 1rem;padding-block:.6rem}
+.brand{display:flex;flex-direction:column;line-height:1.15}
+.brand b{font-family:var(--display);font-size:1.35rem;letter-spacing:.01em}
+.brand small{font-size:.8rem;opacity:.9}
+.tools{display:flex;flex-wrap:wrap;gap:.4rem}
+.navbtn{font:inherit;font-size:.95rem;font-weight:700;display:inline-flex;align-items:center;gap:.4rem;min-height:44px;background:transparent;color:#fff;border:1px solid rgba(255,255,255,.55);border-radius:4px;padding:.4rem .75rem;cursor:pointer}
+.navbtn:hover{background:rgba(255,255,255,.12)}
+.navbtn svg{width:1.2rem;height:1.2rem}
+.navbtn:focus-visible{outline-color:#fff}
+.a11y,.confirm{max-width:1040px;margin:1rem auto 0;background:var(--alt);border:1px solid var(--edge);border-left:6px solid var(--blue);border-radius:4px;padding:1rem;display:flex;flex-direction:column;gap:.75rem}
+.confirm{border-left-color:var(--red)}
+.a11y h2,.confirm p{margin:0}.a11y h2{font-family:var(--display);font-size:1.25rem}
+.a11y fieldset{border:0;padding:0;margin:0;display:flex;flex-wrap:wrap;gap:.5rem;align-items:center}
+.a11y legend{font-weight:700;margin-bottom:.35rem}
+.seg{display:inline-flex;border:1px solid var(--edge);border-radius:4px;overflow:hidden}
+.seg button{font:inherit;min-height:44px;min-width:56px;border:0;background:var(--bg);color:var(--fg);cursor:pointer;padding:0 .8rem}
+.seg button+button{border-left:1px solid var(--edge)}
+.seg button[aria-pressed="true"]{background:var(--navy);color:var(--on)}
+.tog{display:flex;align-items:center;gap:.6rem;min-height:44px;cursor:pointer}
+.tog input{width:1.4rem;height:1.4rem;accent-color:var(--navy)}
+.a11y p.small{font-size:.9rem;color:var(--muted);margin:0}
+/* shared */
+.btn{font:inherit;font-weight:700;font-size:1.05rem;min-height:48px;border:2px solid var(--navy);border-radius:4px;padding:.65rem 1.2rem;background:var(--navy);color:var(--on);cursor:pointer}
+.btn:hover{filter:brightness(1.12)}
+.btn.ghost{background:var(--bg);color:var(--navy)}
+.btn.ghost:hover{background:var(--soft)}
+.btn.done{background:var(--done);border-color:var(--done);color:#fff}
+.link{font:inherit;font-size:1rem;background:none;border:0;color:var(--blue);text-decoration:underline;cursor:pointer;padding:.5rem;min-height:44px}
+.row{display:flex;flex-wrap:wrap;gap:.6rem;justify-content:center}
+/* onboarding */
+#app{max-width:1040px;margin:0 auto}
+.onb-wrap{max-width:640px;margin:1.5rem auto 0;display:flex;flex-direction:column;align-items:center;gap:1.25rem;text-align:center}
+.dots{display:flex;gap:.5rem}.dots i{width:2.2rem;height:.4rem;border-radius:2px;background:var(--line)}.dots i.on{background:var(--red)}
+.hello{font-family:var(--display);font-weight:700;font-size:clamp(2rem,8vw,3.25rem);line-height:1.1;color:var(--navy);margin:0;min-height:1.15em;transition:opacity .4s}
+.prompt{font-family:var(--display);font-weight:700;font-size:clamp(1.5rem,5vw,2rem);margin:0;line-height:1.2;text-wrap:balance;color:var(--navy)}
+.sub{color:var(--muted);margin:0;max-width:44ch}
+.orb{width:10rem;height:10rem;border-radius:50%;border:4px solid var(--band);background:var(--band);color:#fff;cursor:pointer;display:flex;flex-direction:column;align-items:center;justify-content:center;gap:.35rem;font:700 1.1rem var(--body);position:relative}
+.orb svg{width:3.2rem;height:3.2rem}
+.orb.talking::after,.mic.live::after{content:"";position:absolute;inset:-12px;border-radius:50%;border:3px solid var(--red);animation:ring 1.3s infinite}
+@keyframes ring{from{transform:scale(.92);opacity:1}to{transform:scale(1.18);opacity:0}}
+.choices{display:grid;grid-template-columns:repeat(auto-fill,minmax(9.5rem,1fr));gap:.75rem;width:100%}
+.choice{font:inherit;background:var(--bg);color:var(--fg);border:1px solid var(--edge);border-radius:4px;padding:1rem .75rem;cursor:pointer;display:flex;flex-direction:column;align-items:center;gap:.4rem;min-height:7.5rem;justify-content:center;position:relative}
+.choice:hover{border-color:var(--navy);background:var(--soft)}
+.choice.sel{border:3px solid var(--navy);background:var(--soft)}
+.choice .ic{width:3.2rem;height:3.2rem;border-radius:4px;background:var(--soft);color:var(--navy);display:grid;place-items:center}
+.choice .ic svg{width:1.9rem;height:1.9rem}
+.choice b{font-size:1.15rem;line-height:1.2}.choice small{color:var(--muted);font-size:.9rem;line-height:1.25}
+.detect{display:inline-flex;align-items:center;gap:.4rem;background:var(--soft);color:var(--navy);border:1px solid var(--navy);border-radius:4px;padding:.3rem .8rem;font-size:.95rem;font-weight:700}
+.detect svg{width:1rem;height:1rem}
+.mic{position:relative;width:3.5rem;height:3.5rem;border-radius:50%;border:2px solid var(--navy);background:var(--bg);color:var(--navy);cursor:pointer;display:grid;place-items:center;flex:none}
+.mic svg{width:1.6rem;height:1.6rem}
+.heard{font-size:.95rem;color:var(--muted);min-height:1.4em;margin:0}
+.loading{padding-top:2.5rem}
+.spinner{width:3rem;height:3rem;border-radius:50%;border:5px solid var(--line);border-top-color:var(--red);animation:spin 1s linear infinite}
+@keyframes spin{to{transform:rotate(360deg)}}
+.detected{width:100%;background:var(--alt);border:1px solid var(--edge);border-radius:4px;padding:1rem;display:flex;flex-direction:column;gap:.75rem;text-align:start}
+.dtitle{margin:0;font-size:.85rem;font-weight:700;letter-spacing:.06em;text-transform:uppercase;color:var(--red)}
+.drow{display:flex;gap:.75rem;align-items:center}
+.drow .ic,.office .ic{width:2.5rem;height:2.5rem;border-radius:4px;background:var(--bg);color:var(--navy);display:grid;place-items:center;flex:none;border:1px solid var(--line)}
+.drow .ic svg,.office .ic svg{width:1.4rem;height:1.4rem}
+.drow>span:nth-child(2){flex:1;min-width:0}.drow b{display:block}.drow small{display:block;color:var(--muted);font-size:.9rem;line-height:1.3}
+.locin{display:flex;flex-wrap:wrap;gap:.5rem}
+.locin form{display:flex;gap:.5rem;flex:1 1 15rem;min-width:0}
+.locin input{flex:1;min-width:0;font:inherit;min-height:48px;padding:.6rem .8rem;border-radius:4px;border:2px solid var(--edge);background:var(--bg);color:var(--fg);text-transform:uppercase}
+.dtag{font-size:.75rem;font-weight:700;background:var(--red);color:#fff;border-radius:3px;padding:.1rem .5rem}
+.dtag.mute{background:var(--alt);color:var(--muted);border:1px solid var(--line)}
+.dtag.sim{background:var(--warn);color:var(--fg);border:1px solid var(--warn-edge)}
+/* guide */
+.wrap{display:flex;flex-direction:column;gap:1.6rem;padding-top:1.25rem}
+.top{display:flex;flex-wrap:wrap;gap:.75rem;align-items:center;justify-content:space-between}
+.who{display:flex;flex-wrap:wrap;gap:.5rem;align-items:center}
+.pill{display:inline-flex;align-items:center;gap:.4rem;font:inherit;font-size:.95rem;font-weight:700;min-height:44px;background:var(--bg);border:1px solid var(--edge);color:var(--navy);border-radius:4px;padding:.3rem .75rem;cursor:pointer}
+.pill svg{width:1.1rem;height:1.1rem}
+h1{font-family:var(--display);font-weight:700;font-size:clamp(1.9rem,5.5vw,2.6rem);line-height:1.15;margin:0;color:var(--navy);text-wrap:balance;padding-bottom:.4rem;border-bottom:3px solid var(--red);align-self:flex-start}
+.progress{font-size:.95rem;color:var(--muted);min-width:12rem}
+.bar{height:.7rem;border-radius:2px;background:var(--alt);border:1px solid var(--line);overflow:hidden;margin-top:.25rem}
+.bar span{display:block;height:100%;background:var(--done);width:0;transition:width .3s}
+.next{display:flex;gap:1rem;align-items:center;background:var(--band);color:#fff;border-radius:4px;padding:1.1rem 1.25rem;border:0;font:inherit;text-align:start;cursor:pointer;width:100%;border-left:8px solid var(--red)}
+.next .ic{width:3.6rem;height:3.6rem;border-radius:4px;background:rgba(255,255,255,.14);display:grid;place-items:center;flex:none}
+.next .ic svg{width:2rem;height:2rem}
+.next small{display:block;font-size:.8rem;letter-spacing:.08em;text-transform:uppercase;opacity:.9}
+.next b{display:block;font-family:var(--display);font-size:1.5rem;line-height:1.2}
+.next span.s{display:block;opacity:.92;font-size:1rem}
+.next .go{margin-inline-start:auto;font-size:1.75rem}
+.emerg{display:flex;flex-wrap:wrap;gap:.6rem}
+.num{flex:1 1 11rem;display:flex;gap:.75rem;align-items:center;background:var(--alt);border:1px solid var(--line);border-radius:4px;padding:.6rem .9rem}
+.num b{font-family:var(--display);font-size:1.5rem;font-variant-numeric:tabular-nums;color:var(--red);min-width:2.6em}
+.num span{font-size:.95rem;line-height:1.3}
+section.phase h2{font-family:var(--display);font-weight:700;font-size:1.5rem;margin:0;color:var(--navy)}
+section.phase p.when{margin:.1rem 0 .9rem;color:var(--muted);font-size:1rem}
+.grid{display:grid;grid-template-columns:repeat(auto-fill,minmax(9.5rem,1fr));gap:.75rem}
+.tile{position:relative;font:inherit;text-align:start;background:var(--bg);color:var(--fg);border:1px solid var(--edge);border-radius:4px;padding:1rem .9rem .9rem;cursor:pointer;display:flex;flex-direction:column;gap:.55rem;min-height:9.5rem;transition:border-color .15s,box-shadow .15s}
+.tile:hover{border-color:var(--navy);box-shadow:0 2px 0 var(--navy)}
+.tile .ic{width:3.2rem;height:3.2rem;border-radius:4px;background:var(--soft);color:var(--navy);display:grid;place-items:center}
+.tile .ic svg{width:1.9rem;height:1.9rem}
+.tile b{font-size:1.1rem;line-height:1.2;color:var(--navy)}.tile small{color:var(--muted);font-size:.9rem;line-height:1.3}
+.tile.done{border-color:var(--done)}
+.tile.done .ic{background:var(--done);color:#fff}
+.tile .check{position:absolute;top:.75rem;inset-inline-end:.75rem;width:1.5rem;height:1.5rem;border-radius:50%;border:2px solid var(--edge);display:grid;place-items:center;background:var(--bg)}
+.tile.done .check{background:var(--done);border-color:var(--done);color:#fff}
+.tile .check svg{width:.9rem;height:.9rem;display:none}.tile.done .check svg{display:block}
+.tile .wl{display:none;font-size:.8rem;font-weight:700;color:var(--muted)}
+.tile.wait{background:var(--alt);border-style:dashed}.tile.wait .wl{display:block}
+.foot{font-size:.9rem;color:var(--muted);max-width:70ch;border-top:1px solid var(--line);padding-top:1rem}
+.foot p{margin:0 0 .5rem}
+.scrim{position:fixed;inset:0;background:var(--scrim);z-index:20}
+.sheet{position:fixed;z-index:21;background:var(--bg);color:var(--fg);overflow-y:auto;left:0;right:0;bottom:0;max-height:90%;border-radius:8px 8px 0 0;border-top:6px solid var(--red);
+  padding:1.25rem max(20px,env(safe-area-inset-right,0px)) calc(1.5rem + env(safe-area-inset-bottom,0px)) max(20px,env(safe-area-inset-left,0px))}
+@media (min-width:760px){.sheet{left:auto;top:0;bottom:0;width:31rem;max-height:none;border-radius:0;border-top:0;border-left:6px solid var(--red);padding-top:calc(1.5rem + env(safe-area-inset-top,0px))}
+  [dir="rtl"] .sheet{right:auto;left:0;border-left:0;border-right:6px solid var(--red)}}
+.sheet-h{display:flex;gap:.9rem;align-items:center;margin-bottom:.4rem}
+.sheet-h .ic{width:3.6rem;height:3.6rem;border-radius:4px;background:var(--soft);color:var(--navy);display:grid;place-items:center;flex:none}
+.sheet-h .ic svg{width:2rem;height:2rem}
+.sheet h3{font-family:var(--display);font-weight:700;font-size:1.6rem;margin:0;line-height:1.2;color:var(--navy)}
+.close{margin-inline-start:auto;align-self:flex-start;font:inherit;font-size:1rem;font-weight:700;min-height:44px;background:var(--bg);border:1px solid var(--edge);border-radius:4px;color:var(--navy);cursor:pointer;padding:.3rem .7rem}
+.sheet h4{font-family:var(--display);font-size:1.05rem;color:var(--navy);margin:1.1rem 0 .35rem;padding-bottom:.2rem;border-bottom:1px solid var(--line)}
+.sheet p,.sheet li{margin:0;font-size:1.05rem}
+.sheet ul{margin:0;padding-inline-start:1.25rem;display:flex;flex-direction:column;gap:.25rem}
+.opts{display:flex;flex-direction:column;gap:.5rem}
+.opt{border:1px solid var(--line);border-inline-start:5px solid var(--city);background:var(--alt);padding:.5rem .75rem;border-radius:2px}
+.opt b{display:block;color:var(--navy)}
+.note{background:var(--warn);border:1px solid var(--warn-edge);border-inline-start:6px solid var(--warn-edge);border-radius:2px;padding:.6rem .9rem;margin-top:.9rem;font-size:1rem;color:var(--fg)}
+.tip{background:var(--soft);border-inline-start:6px solid var(--blue);border-radius:2px;padding:.75rem .9rem;margin-top:.9rem;font-size:1rem}
+.actions{display:flex;flex-wrap:wrap;gap:.5rem;margin-top:1.25rem}
+.qs{display:flex;flex-wrap:wrap;gap:.5rem;margin-top:.5rem}
+.chip{font:inherit;font-size:.95rem;min-height:44px;border:1px solid var(--blue);background:var(--bg);color:var(--blue);border-radius:4px;padding:.4rem .75rem;cursor:pointer;text-align:start;text-decoration:underline}
+.needs{background:var(--warn);border:1px solid var(--warn-edge);border-radius:2px;padding:.6rem .9rem;margin-top:.75rem;color:var(--fg)}
+.needs b{font-size:.95rem}
+.ready{display:flex;align-items:center;gap:.5rem;color:var(--done);font-weight:700;margin-top:.6rem!important}
+.ready svg{width:1.1rem;height:1.1rem}
+.help{display:flex;flex-direction:column;gap:.5rem}
+.hcard{display:flex;gap:.75rem;align-items:flex-start;border:1px solid var(--line);border-radius:4px;padding:.6rem .75rem;background:var(--alt)}
+.hcard .ic{width:2.2rem;height:2.2rem;border-radius:4px;background:var(--bg);color:var(--navy);display:grid;place-items:center;flex:none}
+.hcard .ic svg{width:1.25rem;height:1.25rem}
+.hcard b{display:block;font-size:1rem;color:var(--navy)}.hcard span{font-size:.95rem;line-height:1.4;min-width:0}
+.office{display:flex;gap:.75rem;align-items:flex-start;border:2px solid var(--city);border-radius:4px;padding:.75rem;margin-top:.5rem}
+.office span:last-child{display:flex;flex-direction:column;gap:.15rem;min-width:0;font-size:1rem}
+.office a{font-weight:700;margin-top:.25rem;min-height:44px;display:inline-flex;align-items:center}
+.office small{color:var(--muted);font-size:.9rem}
+.askbar{position:fixed;left:0;right:0;bottom:0;z-index:10;background:var(--alt);border-top:3px solid var(--navy);
+  padding:.7rem max(16px,env(safe-area-inset-right,0px)) calc(.7rem + env(safe-area-inset-bottom,0px)) max(16px,env(safe-area-inset-left,0px))}
+.askbar .in{max-width:1040px;margin:0 auto;display:flex;flex-direction:column;gap:.6rem}
+.answer{max-height:34vh;overflow-y:auto;font-size:1.05rem;white-space:pre-wrap;background:var(--bg);border:1px solid var(--line);border-radius:4px;padding:.6rem .8rem}
+.answer .lbl{font-size:.8rem;font-weight:700;letter-spacing:.06em;text-transform:uppercase;color:var(--red);display:block}
+form.ask{display:flex;gap:.5rem;align-items:center}
+form.ask input{flex:1;min-width:0;font:inherit;min-height:48px;padding:.6rem .8rem;border-radius:4px;border:2px solid var(--edge);background:var(--bg);color:var(--fg)}
+@media (max-width:520px){
+  .choices,.grid{grid-template-columns:repeat(2,minmax(0,1fr));gap:.6rem}
+  .choice{min-height:6.25rem;padding:.75rem .5rem}.choice b{font-size:1rem}
+  .orb{width:8.5rem;height:8.5rem}
+  .tile{min-height:8.25rem;padding:.85rem .75rem}.tile b{font-size:1rem}
+  .next{padding:.9rem}.next .ic{width:3rem;height:3rem}.next b{font-size:1.25rem}
+  .emerg{flex-wrap:nowrap;gap:.5rem}.num{flex:1 1 0;min-width:0;flex-direction:column;align-items:flex-start;gap:.1rem;padding:.6rem}
+  .num b{font-size:1.35rem;min-width:0}.num span{font-size:.75rem}
+  .mic{width:3rem;height:3rem}form.ask .btn{padding:.6rem .9rem}
+  .brand b{font-size:1.15rem}.navbtn span.t{display:none}
+}
+.office-ui{z-index:31}
+.link.back{align-self:flex-start;font-weight:700;text-decoration:none;padding-inline:0}
+.link.back:hover{text-decoration:underline}
+.choices.aud{grid-template-columns:repeat(auto-fit,minmax(min(100%,15rem),1fr))}
+.choices.aud .choice{min-height:12rem;padding:1.25rem}
+.choices.aud .ic{width:4.5rem;height:4.5rem}.choices.aud .ic svg{width:2.75rem;height:2.75rem}
+.choices.aud b{font-size:1.35rem}.choices.aud small{font-size:1rem}
+.cityban{display:flex;gap:.9rem;align-items:center;background:var(--alt);border:1px solid var(--line);border-inline-start:8px solid var(--city);border-radius:4px;padding:.75rem 1rem}
+.cmark{width:2.75rem;height:2.75rem;border-radius:50%;background:var(--city);color:var(--bg);display:grid;place-items:center;font-family:var(--display);font-weight:700;font-size:1.3rem;flex:none}
+.cityban b{display:block;color:var(--fg);font-size:1.1rem}.cityban small{color:var(--muted)}
+.pill.city{border-color:var(--city);box-shadow:inset 0 -3px 0 var(--city)}
+.choice.sel .ic{background:var(--city);color:var(--bg)}
+.kpis{display:grid;grid-template-columns:repeat(auto-fit,minmax(9rem,1fr));gap:.75rem}
+.kpi{background:var(--alt);border:1px solid var(--line);border-top:4px solid var(--red);border-radius:4px;padding:.8rem 1rem;display:flex;flex-direction:column}
+.kpi b{font-family:var(--display);font-size:2rem;color:var(--navy);font-variant-numeric:tabular-nums;line-height:1.1}
+.kpi span{color:var(--muted);font-size:.9rem}
+.ins-grid{display:grid;grid-template-columns:repeat(auto-fit,minmax(min(100%,22rem),1fr));gap:1rem}
+.ins-card{border:1px solid var(--line);border-radius:4px;padding:1rem;background:var(--bg);min-width:0}
+.ins-card h2{font-family:var(--display);font-size:1.15rem;margin:0;color:var(--navy)}
+.bars{list-style:none;margin:.75rem 0 0;padding:0;display:flex;flex-direction:column;gap:.45rem}
+.bars li{display:grid;grid-template-columns:minmax(0,9.5rem) 1fr auto;gap:.6rem;align-items:center;font-size:.92rem}
+.bl{overflow:hidden;text-overflow:ellipsis;white-space:nowrap}
+.bt{height:.9rem;background:var(--alt);border:1px solid var(--line);border-radius:2px;overflow:hidden}
+.bf{display:block;height:100%;background:var(--navy)}
+.bv{font-variant-numeric:tabular-nums;color:var(--muted);white-space:nowrap}
+#oScrim{z-index:30}
+.oi-in{display:flex;flex-direction:column;gap:.75rem}
+.oi-mode{align-self:flex-start;flex-wrap:wrap}
+.oi-form{display:flex;flex-direction:column;gap:.5rem}
+.oi-form textarea{font:inherit;width:100%;min-height:5rem;padding:.6rem .8rem;border:2px solid var(--edge);border-radius:4px;background:var(--bg);color:var(--fg)}
+.oi-card{border:3px solid var(--navy);border-radius:4px;padding:1rem;background:var(--bg);display:flex;flex-direction:column;gap:.5rem}
+.oi-card small{font-weight:700;letter-spacing:.06em;text-transform:uppercase;color:var(--red);font-size:.8rem}
+.oi-card .big{font-family:var(--display);font-size:clamp(1.5rem,5vw,2rem);line-height:1.25;margin:0;color:var(--navy)}
+.oi-card .src{margin:0;color:var(--muted);font-size:1rem}
+.oi-phrases{display:grid;grid-template-columns:repeat(auto-fill,minmax(13rem,1fr));gap:.5rem}
+.oi-ph{font:inherit;text-align:start;min-height:48px;background:var(--alt);border:1px solid var(--edge);border-inline-start:5px solid var(--navy);border-radius:4px;padding:.6rem .75rem;cursor:pointer;display:flex;flex-direction:column;gap:.2rem;color:var(--fg)}
+.oi-ph b{color:var(--navy)}
+.oi-ph:hover{background:var(--soft)}
+@media (min-width:760px){.office-ui{width:38rem}}
+.small{font-size:.9rem;color:var(--muted);margin:0}
+html.rm *,html.rm *::before,html.rm *::after{animation:none!important;transition:none!important}
+@media (prefers-reduced-motion:reduce){*,*::before,*::after{animation:none!important;transition:none!important}}
+</style>
+
+<a class="skip" href="#app" data-i18n="skip">Skip to main content</a>
+<header class="band"><div class="in gut">
+  <div class="brand"><b>Esther</b><small data-i18n="brandSub">Newcomer guide · Independent community service, not a Government of Canada website</small></div>
+  <nav class="tools" aria-label="Page tools">
+    <button class="navbtn" id="goHome" type="button"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M3 11l9-7 9 7M5 10v10h14V10M10 20v-5h4v5"/></svg><span class="t" data-i18n="homeL">Home</span></button>
+    <button class="navbtn" id="officeBtn" type="button"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M4 5h9M8.5 3v2M6 5c1 4 4 7 7 8M11 5c-1 4-4 7-7 8"/><path d="M13 21l4-9 4 9M14.5 18h5"/></svg><span class="t" data-i18n="officeBtn">Translator</span></button>
+    <button class="navbtn" id="themeBtn" type="button" aria-pressed="false"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M20 14.5A8 8 0 0 1 9.5 4 8 8 0 1 0 20 14.5z"/></svg><span class="t" data-i18n="darkL">Dark mode</span></button>
+    <button class="navbtn" id="a11yBtn" type="button" aria-expanded="false" aria-controls="a11y"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><circle cx="12" cy="4.5" r="1.8"/><path d="M5 8.5l7 1.5 7-1.5M12 10v4l-3 6M12 14l3 6"/></svg><span class="t" data-i18n="a11yL">Accessibility</span></button>
+    <button class="navbtn" id="startOver" type="button"><span data-i18n="startOverL">Start over (demo)</span></button>
+  </nav>
+</div></header>
+<div class="gut">
+  <section class="a11y" id="a11y" hidden aria-labelledby="a11yT">
+    <h2 id="a11yT" data-i18n="a11yTitle">Accessibility settings</h2>
+    <fieldset><legend data-i18n="textSize">Text size</legend><div class="seg" role="group">
+      <button type="button" data-ts="0" aria-pressed="true">A</button><button type="button" data-ts="1" aria-pressed="false">A+</button><button type="button" data-ts="2" aria-pressed="false">A++</button></div></fieldset>
+    <fieldset><legend data-i18n="themeL">Colour theme</legend><div class="seg" role="group">
+      <button type="button" data-th="auto" aria-pressed="true" data-i18n="thAuto">Match my device</button><button type="button" data-th="light" aria-pressed="false" data-i18n="thLight">Light</button><button type="button" data-th="dark" aria-pressed="false" data-i18n="thDark">Dark</button></div></fieldset>
+    <label class="tog" for="optHc"><input type="checkbox" id="optHc"> <span data-i18n="hcL">High contrast</span></label>
+    <label class="tog" for="optRm"><input type="checkbox" id="optRm"> <span data-i18n="rmL">Reduce motion</span></label>
+    <label class="tog" for="optRead"><input type="checkbox" id="optRead" checked> <span data-i18n="readL">Read each step aloud automatically</span></label>
+    <label class="tog" for="optUl"><input type="checkbox" id="optUl"> <span data-i18n="ulL">Underline all links</span></label>
+    <p class="small" data-i18n="a11yNote">Designed to WCAG 2.0 Level AA, the web standard required under Ontario's AODA. Works with a keyboard alone and with screen readers. Settings are saved on this device.</p>
+    <div><button class="btn ghost" id="a11yClose" type="button" data-i18n="doneBtn">Done</button></div>
+  </section>
+  <div class="confirm" id="confirm" hidden role="alertdialog" aria-labelledby="cfT">
+    <p id="cfT"><b data-i18n="cfQ">Start over?</b> <span data-i18n="cfBody">This clears the language, city, document and progress on this device so you can run the demo again.</span></p>
+    <div class="row" style="justify-content:flex-start"><button class="btn" id="cfYes" type="button" data-i18n="cfYes">Yes, start over</button><button class="btn ghost" id="cfNo" type="button" data-i18n="cfNo">Cancel</button></div>
+  </div>
+</div>
+<div class="scrim" id="oScrim" hidden></div>
+<section class="sheet office-ui" id="officeUi" hidden role="dialog" aria-modal="true" aria-labelledby="oiT"></section>
+<main id="app" class="gut" tabindex="-1"></main>
+
+<script>
+// ================= Icons =================
+const I = {
+  senior:'<circle cx="10" cy="4.5" r="2"/><path d="M10 7v6l-3 7M10 13l3 7M7 10l3-1 3 2M17 11v10M15 11h2"/>',
+  sin:'<rect x="3" y="6" width="18" height="12" rx="2"/><path d="M7 10h5M7 14h8"/><circle cx="17" cy="10" r="1.5"/>',
+  health:'<rect x="3" y="6" width="18" height="12" rx="2"/><path d="M12 9v6M9 12h6"/>',
+  docs:'<path d="M5 3h10l4 4v14H5z"/><path d="M15 3v4h4"/><circle cx="12" cy="12" r="2.5"/><path d="M8.5 18c.6-1.6 2-2.5 3.5-2.5s2.9.9 3.5 2.5"/>',
+  phone:'<rect x="7" y="2.5" width="10" height="19" rx="2"/><path d="M11 18h2"/>',
+  bank:'<path d="M3 9l9-5 9 5M5 9v8M9.5 9v8M14.5 9v8M19 9v8M3 20h18"/>',
+  settle:'<circle cx="8" cy="8" r="3"/><circle cx="16" cy="8" r="3"/><path d="M3 19c0-3 2.5-5 5-5s5 2 5 5M11 19c0-3 2.5-5 5-5s5 2 5 5"/>',
+  home:'<path d="M3 11l9-7 9 7M5 10v10h14V10M10 20v-5h4v5"/>',
+  school:'<path d="M2 9l10-5 10 5-10 5z"/><path d="M6 11v5c0 1.5 3 3 6 3s6-1.5 6-3v-5"/>',
+  lang:'<path d="M4 5h9M8.5 3v2M6 5c1 4 4 7 7 8M11 5c-1 4-4 7-7 8"/><path d="M13 21l4-9 4 9M14.5 18h5"/>',
+  bus:'<rect x="4" y="3" width="16" height="15" rx="3"/><path d="M4 11h16M8 21v-3M16 21v-3"/><circle cx="8" cy="14.5" r=".8"/><circle cx="16" cy="14.5" r=".8"/>',
+  food:'<path d="M5 9h14l-1.5 11h-11z"/><path d="M9 9V6a3 3 0 0 1 6 0v3"/>',
+  doctor:'<path d="M6 3v6a4 4 0 0 0 8 0V3"/><path d="M10 13v3a5 5 0 0 0 10 0v-2"/><circle cx="20" cy="12" r="2"/>',
+  car:'<path d="M5 16V11l2-5h10l2 5v5"/><path d="M3 16h18v3H3z"/><circle cx="7.5" cy="13" r="1"/><circle cx="16.5" cy="13" r="1"/>',
+  child:'<circle cx="12" cy="6" r="3"/><path d="M7 21l1-7h8l1 7M8 14l-3-3M16 14l3-3"/>',
+  tax:'<path d="M6 3h9l4 4v14H6z"/><path d="M14 3v5h5M9 13h7M9 17h5"/>',
+  job:'<rect x="3" y="7" width="18" height="13" rx="2"/><path d="M9 7V5h6v2M3 13h18"/>',
+  emerg:'<path d="M12 3l9 16H3z"/><path d="M12 10v4M12 17h.01"/>',
+  pr:'<rect x="3" y="5" width="18" height="14" rx="2"/><circle cx="8.5" cy="11" r="2"/><path d="M5.5 16c.5-1.4 1.6-2 3-2s2.5.6 3 2M14 10h4M14 13h3"/>',
+  work:'<rect x="3" y="7" width="18" height="13" rx="2"/><path d="M9 7V5h6v2"/><path d="M9 13l2 2 4-4"/>',
+  study:'<path d="M2 9l10-5 10 5-10 5z"/><path d="M6 11v5c0 1.5 3 3 6 3s6-1.5 6-3v-5M22 9v6"/>',
+  shield:'<path d="M12 3l8 3v6c0 5-3.5 8-8 9-4.5-1-8-4-8-9V6z"/><path d="M9 12l2 2 4-4"/>',
+  q:'<circle cx="12" cy="12" r="9"/><path d="M9.5 9.5a2.5 2.5 0 1 1 3.5 2.3c-.6.3-1 .9-1 1.6V14M12 17h.01"/>',
+  pin:'<path d="M12 21s-7-6.2-7-11a7 7 0 0 1 14 0c0 4.8-7 11-7 11z"/><circle cx="12" cy="10" r="2.5"/>',
+  globe:'<circle cx="12" cy="12" r="9"/><path d="M3 12h18M12 3c3 3 3 15 0 18M12 3c-3 3-3 15 0 18"/>',
+  speak:'<path d="M4 9v6h4l5 4V5L8 9z"/><path d="M16 9a4 4 0 0 1 0 6M18.5 6.5a8 8 0 0 1 0 11"/>',
+  mic:'<rect x="9" y="3" width="6" height="11" rx="3"/><path d="M5 11a7 7 0 0 0 14 0M12 18v3"/>',
+  check:'<path d="M5 12l5 5 9-10"/>'
+};
+const svg=(k,w)=>`<svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="${w||1.8}" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true">${I[k]}</svg>`;
+
+// ================= Languages (greeting is pre-written so Esther can speak first, before any AI) =================
+const GREET_AUDIO={}; /*AUDIO*/
+const LANGS=[
+ {c:"en-CA",n:"English",hi:"Welcome",yes:"Yes, continue",say:"Welcome. I am Esther, and I am here to help."},
+ {c:"fr-CA",n:"Français",hi:"Bienvenue",yes:"Oui, continuer",say:"Bienvenue. Je suis Esther, et je suis là pour vous aider."},
+ {c:"zh-CN",n:"普通话 (Mandarin)",hi:"欢迎",yes:"是的，继续",say:"欢迎。我是埃丝特，我在这里帮助您。"},
+ {c:"zh-HK",n:"廣東話 (Cantonese)",hi:"歡迎",yes:"係，繼續",say:"歡迎。我係Esther，我喺度幫你。"},
+ {c:"ta-IN",n:"தமிழ் (Tamil)",hi:"வரவேற்கிறோம்",yes:"ஆம், தொடரவும்",say:"வரவேற்கிறோம். நான் எஸ்தர், உங்களுக்கு உதவ இங்கே இருக்கிறேன்."},
+ {c:"pa-IN",n:"ਪੰਜਾਬੀ (Punjabi)",hi:"ਜੀ ਆਇਆਂ ਨੂੰ",yes:"ਹਾਂ, ਅੱਗੇ ਚੱਲੋ",say:"ਜੀ ਆਇਆਂ ਨੂੰ। ਮੈਂ ਐਸਥਰ ਹਾਂ, ਅਤੇ ਮੈਂ ਤੁਹਾਡੀ ਮਦਦ ਲਈ ਇੱਥੇ ਹਾਂ।"},
+ {c:"hi-IN",n:"हिन्दी (Hindi)",hi:"स्वागत है",yes:"हाँ, आगे बढ़ें",say:"स्वागत है। मैं एस्थर हूँ, और मैं आपकी मदद के लिए यहाँ हूँ।"},
+ {c:"ur-PK",n:"اردو (Urdu)",hi:"خوش آمدید",yes:"جی ہاں، آگے چلیں",say:"خوش آمدید۔ میں ایستھر ہوں، اور میں آپ کی مدد کے لیے یہاں ہوں۔",rtl:1},
+ {c:"fa-IR",n:"فارسی (Farsi)",hi:"خوش آمدید",yes:"بله، ادامه",say:"خوش آمدید. من استر هستم و اینجا هستم تا به شما کمک کنم.",rtl:1},
+ {c:"ar",n:"العربية (Arabic)",hi:"أهلاً وسهلاً",yes:"نعم، متابعة",say:"أهلاً وسهلاً. أنا إستر، وأنا هنا لمساعدتك.",rtl:1},
+ {c:"es-ES",n:"Español",hi:"Bienvenido",yes:"Sí, continuar",say:"Bienvenido. Soy Esther y estoy aquí para ayudarle."},
+ {c:"tl-PH",n:"Tagalog",hi:"Maligayang pagdating",yes:"Oo, magpatuloy",say:"Maligayang pagdating. Ako si Esther, at narito ako para tumulong."},
+ {c:"uk-UA",n:"Українська",hi:"Ласкаво просимо",yes:"Так, продовжити",say:"Ласкаво просимо. Я Естер, і я тут, щоб допомогти."}
+];
+
+// ================= Cities (sample data — verify before pilot) =================
+const CITIES={
+ markham:{n:"Markham",region:"York Region",transit:[
+   {n:"YRT and Viva",d:"York Region Transit buses and Viva rapid-transit lines run across Markham."},
+   {n:"GO Transit",d:"Stouffville line trains stop in Markham and run to Union Station in downtown Toronto. GO buses also connect."},
+   {n:"TTC",d:"Toronto's buses and subway connect at Markham's southern and western borders."},
+   {n:"PRESTO card",d:"One tap card that works on YRT, Viva, GO and TTC. Buy one at a GO station or Shoppers Drug Mart."},
+   {n:"YRT Mobility Plus",d:"Door-to-door rides for people with disabilities who can't use regular buses. Apply first."}],
+  boards:"York Region District School Board, or York Catholic District School Board",library:"Markham Public Library",
+  settle:"York Region has newcomer Welcome Centres, including one in Markham. Call 211 to find the right one."},
+ toronto:{n:"Toronto",region:"City of Toronto",transit:[
+   {n:"TTC",d:"Subway, streetcars and buses across Toronto."},{n:"GO Transit",d:"Regional trains and buses from Union Station."},
+   {n:"UP Express",d:"Train between Pearson Airport and Union Station."},{n:"PRESTO card",d:"Tap to pay on TTC, GO and UP Express."}],
+  boards:"Toronto District School Board, or Toronto Catholic District School Board",library:"Toronto Public Library",settle:"Call 211 for newcomer settlement agencies near you."},
+ mississauga:{n:"Mississauga",region:"Peel Region",transit:[
+   {n:"MiWay",d:"Mississauga's city buses."},{n:"GO Transit",d:"Trains and buses to Toronto and across the region."},{n:"PRESTO card",d:"Tap to pay on MiWay, GO and TTC."}],
+  boards:"Peel District School Board, or Dufferin-Peel Catholic District School Board",library:"Mississauga Library",settle:"Call 211 for newcomer settlement agencies in Peel."},
+ brampton:{n:"Brampton",region:"Peel Region",transit:[
+   {n:"Brampton Transit and Züm",d:"City buses and Züm rapid-transit routes."},{n:"GO Transit",d:"Kitchener line trains and GO buses to Toronto."},{n:"PRESTO card",d:"Tap to pay on Brampton Transit, GO and TTC."}],
+  boards:"Peel District School Board, or Dufferin-Peel Catholic District School Board",library:"Brampton Library",settle:"Call 211 for newcomer settlement agencies in Peel."},
+ vaughan:{n:"Vaughan",region:"York Region",transit:[
+   {n:"YRT and Viva",d:"York Region buses and Viva rapid transit."},{n:"TTC subway",d:"Line 1 reaches Vaughan Metropolitan Centre."},{n:"GO Transit",d:"Barrie line trains to Union Station."},{n:"PRESTO card",d:"Tap to pay on YRT, TTC and GO."}],
+  boards:"York Region District School Board, or York Catholic District School Board",library:"Vaughan Public Libraries",settle:"York Region has newcomer Welcome Centres. Call 211 to find the nearest."},
+ richmondhill:{n:"Richmond Hill",region:"York Region",transit:[
+   {n:"YRT and Viva",d:"York Region buses and Viva rapid transit."},{n:"GO Transit",d:"Richmond Hill line trains to Union Station."},{n:"PRESTO card",d:"Tap to pay on YRT, GO and TTC."}],
+  boards:"York Region District School Board, or York Catholic District School Board",library:"Richmond Hill Public Library",settle:"York Region has newcomer Welcome Centres. Call 211 to find the nearest."},
+ other:{n:"Another Ontario city",region:"Ontario",transit:[
+   {n:"Your city's buses",d:"Most Ontario cities run their own bus service. Ask 211 or a settlement worker."},{n:"GO Transit",d:"Regional trains and buses across the Greater Toronto and Hamilton Area."}],
+  boards:"your local public or Catholic school board",library:"your public library",settle:"Call 211 for newcomer settlement agencies near you."}
+};
+
+// ================= Document types =================
+const STATUS=[
+ {id:"pr",ic:"pr",t:"Permanent resident",s:"COPR or PR card"},
+ {id:"work",ic:"work",t:"Work permit",s:"Temporary foreign worker"},
+ {id:"study",ic:"study",t:"Study permit",s:"International student"},
+ {id:"refugee",ic:"shield",t:"Refugee or protected person",s:"Including claimants"},
+ {id:"unsure",ic:"q",t:"I'm not sure",s:"Esther will show general steps"}
+];
+
+// ================= Steps (English source; ordered so nothing needs a step that comes later) =================
+function buildSteps(city){
+ const C=CITIES[city];
+ const SW={n:"Settlement worker",d:"Free help with this step, often in your language. Call 211 to find one."};
+ const LIB={n:C.library,d:"Free Wi-Fi, computers, printers and newcomer programs."};
+ const H811={n:"Health811",d:"Free advice from a registered nurse by phone, day or night. Dial 811."};
+ return [
+ {id:"d1",title:"Your first days",when:"Get connected and find a place to stay. Every later step needs these.",steps:[
+  {id:"docs",ic:"docs",t:"Your immigration documents",s:"Keep them safe and valid",needs:[],
+   why:"Your immigration document proves your right to be in Canada. You will show it at almost every office.",
+   bring:["Passport","Your COPR, PR card, work permit or study permit","Photos of each, stored somewhere separate"],
+   where:"Keep originals at home. Update your address later in your online IRCC account.",
+   tip:"Write down the expiry dates of your permit and passport. Apply to extend well before they run out.",
+   notes:{pr:"Your PR card arrives by mail after you land. Keep your COPR safe until it does.",
+     work:"Check the conditions printed on your permit: which employer, which job and the end date. Working outside them can affect your status.",
+     study:"Your study permit lists conditions, including limits on off-campus work hours. Check IRCC's current rules before taking a job.",
+     refugee:"Keep your claim documents and every letter you receive. A free legal clinic can help with your case.",
+     unsure:"A settlement worker can look at your documents and tell you which steps apply to you."},
+   help:[SW,{n:"Legal Aid Ontario",d:"Free legal help for people with low income, including immigration and refugee matters."},{n:"Your country's consulate",d:"Replaces lost passports and certifies documents from home."}]},
+  {id:"phone",ic:"phone",t:"Phone and SIM",s:"A Canadian number for every form",needs:[],
+   why:"Banks, Service Canada, landlords and schools all ask for a Canadian phone number.",
+   bring:["Passport","An unlocked phone"],where:"Any phone store or grocery store kiosk.",
+   tip:"Start with a prepaid plan. There's no credit check and you can switch later.",notes:{},
+   help:[LIB,{n:"Settlement worker",d:"Can explain phone plans and contracts before you sign."}]},
+  {id:"transit",ic:"bus",t:"Getting around",s:`Buses and trains in ${C.n}`,needs:[],
+   why:`You'll need transit to reach the offices in the next steps. It's the cheapest way to get around ${C.n}.`,
+   bring:["A PRESTO card, or a bank card that can tap to pay"],where:"See your options below.",options:C.transit,
+   tip:"Fares are often cheaper with a PRESTO card than with cash.",notes:{},
+   help:[{n:"Discounted fares",d:"Ask about student, youth, senior and low-income fare programs."},{n:"Trip planners",d:"Your transit agency's website and app show routes and times."}]},
+  {id:"home",ic:"home",t:"A place to stay",s:"Your address unlocks the next steps",needs:[],
+   why:"You need an Ontario address for your SIN, bank account, health card and school. A temporary address is fine to start.",
+   bring:["ID","Proof of income or savings, for renting","References, if you have them"],
+   where:"Settlement workers can help you search. Disputes go to the Landlord and Tenant Board.",
+   tip:"Most private rentals must use the Ontario Standard Lease. Never pay cash without a receipt, and never pay before seeing the unit.",notes:{},
+   help:[{n:"Emergency shelter",d:"Call 211 any time if you have nowhere safe to sleep."},{n:"Landlord and Tenant Board",d:"Settles disputes between renters and landlords."},{n:"Community legal clinics",d:"Free advice if you have a housing problem."}]}
+ ]},
+ {id:"w1",title:"Your first week",when:"Get your core numbers and cards, in this order.",steps:[
+  {id:"settle",ic:"settle",t:"Settlement services",s:"Free help with everything that follows",needs:["docs"],
+   why:"A settlement worker will help you through the rest of this list, at no cost. Book a first appointment now.",
+   bring:["Your immigration document"],where:C.settle,
+   tip:"Ask them to check your plan for the next month. They can spot anything you've missed.",
+   notes:{work:"Government-funded settlement services are mainly for permanent residents, but many agencies still help temporary workers. Ask.",
+     study:"Your school's international student office is your first stop. Many settlement agencies also help students.",
+     refugee:"Many agencies have workers who specialize in refugee claimants."},
+   help:[{n:"Food banks",d:"Free, confidential groceries. Call 211 for hours near you."},LIB,{n:"Youth, women's and seniors' groups",d:"Many agencies run programs to meet others who are new."}]},
+  {id:"sin",ic:"sin",t:"SIN number",s:"Needed to work and get benefits",needs:["docs","home"],
+   why:"Your Social Insurance Number lets you work legally, get paid, file taxes and receive benefits.",
+   bring:["Passport","Your immigration document","Your address"],
+   where:"Apply online or in person at a Service Canada centre.",
+   tip:"Your SIN is private. Only give it to your employer, bank and the government.",
+   notes:{work:"Your SIN expires on the same date as your permit. Renew it when you extend.",study:"Your SIN expires on the same date as your study permit."},
+   help:[SW,{n:C.library,d:"Free computers to apply online."}]},
+  {id:"bank",ic:"bank",t:"Bank account",s:"Get paid, and get proof of address",needs:["docs","phone"],
+   why:"You need an account to receive pay and pay rent. A letter from your bank also counts as proof of address for your health card.",
+   bring:["Passport","Immigration document","Your address and phone number"],
+   where:"Any major bank or credit union. Most have newcomer packages.",
+   tip:"Ask the bank for a letter showing your address. You'll use it at ServiceOntario.",notes:{},
+   help:[{n:"Money workshops",d:"Free sessions on budgeting and credit at libraries and settlement agencies."},{n:"Non-profit credit counselling",d:"Free, confidential advice if you're worried about money."}]},
+  {id:"ohip",ic:"health",t:"Health card (OHIP)",s:"Ontario's public health insurance",needs:["docs","home","bank"],
+   why:"OHIP pays for doctor visits and hospital care. You need it before you can find a family doctor.",
+   bring:["Your immigration document","Proof of address, such as your lease or bank letter","A second ID with your name and signature"],
+   where:"In person at a ServiceOntario centre.",
+   tip:"Ask when your coverage starts. Until it does, keep private health insurance.",
+   notes:{work:"Some work permit holders qualify for OHIP, depending on the permit. ServiceOntario will confirm.",
+     study:"International students are usually covered by their school's health plan, not OHIP. Ask your international office.",
+     refugee:"Refugee claimants are usually covered by the Interim Federal Health Program until they qualify for OHIP."},
+   help:[H811,{n:"Community Health Centres",d:"Some see people who don't have OHIP yet."},{n:"Walk-in clinics",d:"See a doctor without an appointment."}]}
+ ]},
+ {id:"w2",title:"Weeks two to four",when:"Family, language and health.",steps:[
+  {id:"school",ic:"school",t:"Enrol children in school",s:"Public school is free",needs:["home"],
+   why:"Children aged 6 to 18 must attend school. Your address decides which school they go to.",
+   bring:["Child's passport or birth certificate","Immigration documents","Proof of address","Vaccination records"],
+   where:`Contact ${C.boards}.`,tip:"Schools offer English support for children learning the language.",
+   notes:{work:"Children of most work permit holders can attend public school without fees. The school board will confirm.",
+     study:"If your children came with you, ask the school board whether fees apply."},
+   help:[{n:"Settlement Workers in Schools",d:"Free settlement workers based in schools help families settle in."},{n:C.library,d:"Free homework help and children's programs."},{n:"Before- and after-school care",d:"Ask the school. Fee subsidies may be available."}]},
+  {id:"linc",ic:"lang",t:"English classes",s:"Classes for adults",needs:["settle"],
+   why:"Language classes help with daily life, work and making friends.",
+   bring:["Immigration document"],
+   where:`Your settlement worker books a free language assessment, then a class. ${C.library} runs free conversation circles.`,
+   tip:"Some classes offer free childcare while you learn.",
+   notes:{work:"Free government classes are mostly for permanent residents. Library circles are open to everyone.",
+     study:"Your school may offer free language support. Library circles are open to everyone."},
+   help:[{n:"Conversation circles",d:`Free, friendly practice at ${C.library}.`},{n:"Volunteer tutors",d:"Ask your settlement worker about a practice partner."}]},
+  {id:"doctor",ic:"doctor",t:"Family doctor",s:"Get on the waitlist early",needs:["ohip"],
+   why:"A family doctor looks after your long-term health. Waitlists can be long, so register early.",
+   bring:["Your health card"],where:"Register with Health Care Connect, Ontario's program that matches you with a doctor.",
+   tip:"Use walk-in clinics while you wait.",
+   notes:{study:"Your school's health clinic is usually your first stop."},
+   help:[H811,{n:"Walk-in clinics",d:"See a doctor without an appointment while you wait."},{n:"Pharmacists",d:"In Ontario, pharmacists can treat some minor conditions."}]},
+  {id:"ccb",ic:"child",t:"Canada Child Benefit",s:"Monthly payments for families",needs:["sin","home"],
+   why:"A tax-free monthly payment to help with the cost of raising children under 18.",
+   bring:["Your SIN","Children's birth documents","Immigration documents"],
+   where:"Apply to the Canada Revenue Agency. A settlement worker can help with the form.",
+   tip:"Payments are not automatic for newcomers. Apply as soon as you have your SIN.",
+   notes:{work:"Some temporary residents qualify after living in Canada for 18 months. Check with the CRA.",study:"Some temporary residents qualify after living in Canada for 18 months. Check with the CRA."},
+   help:[SW,{n:"Free tax clinics",d:"Volunteers help with benefit forms."}]}
+ ]},
+ {id:"m3",title:"Your first three months",when:"Work, driving and your first tax return.",steps:[
+  {id:"job",ic:"job",t:"Jobs and credentials",s:"Work in your field",needs:["sin"],
+   why:"Free employment services help with resumes, interviews and getting foreign credentials recognized.",
+   bring:["Resume","Diplomas and transcripts","Professional licences from home"],
+   where:"Employment Ontario centres, or ask your settlement worker.",
+   tip:"Regulated jobs like nursing or engineering need a Canadian licence. Start early; it can take months.",
+   notes:{work:"Your permit may limit you to one employer. Check before changing jobs.",study:"Check your permit's off-campus work rules before accepting a job."},
+   help:[{n:"Employment Ontario",d:"Free job search help, workshops and training."},{n:"Bridging programs",d:"Help internationally trained professionals get licensed."},{n:"Mentoring programs",d:"Meet a professional in your field."}]},
+  {id:"drive",ic:"car",t:"Driver's licence",s:"Exchange or test",needs:["docs"],
+   why:"You can use your foreign licence for a short time only. After that you need an Ontario licence.",
+   bring:["Foreign driver's licence","Passport","Immigration document"],
+   where:"A DriveTest centre. Some countries' licences can be exchanged directly; others need road tests.",
+   tip:"Ask your home licensing office for a letter showing your driving history. It can save you time.",notes:{},
+   help:[{n:"Driving schools",d:"Lessons help you pass road tests."},{n:"Car insurance",d:"Insurance in Ontario can be costly. Compare several quotes."}]},
+  {id:"tax",ic:"tax",t:"File your taxes",s:"Every spring, even with no income",needs:["sin"],
+   why:"Filing every year keeps your benefits and credits flowing, even if you earned nothing.",
+   bring:["SIN","Income slips, if any","The date you arrived in Canada"],
+   where:"Free tax clinics run every spring. Ask 211 or the library.",
+   tip:"Your first return asks for your arrival date and the income you earned before arriving.",notes:{},
+   help:[{n:"Free tax clinics",d:"Volunteers file simple returns at no cost."},LIB]}
+ ]}];
+}
+
+// ================= Senior journey (English source; ordered so nothing needs a later step) =================
+function buildSeniorSteps(city){
+ const C=CITIES[city];
+ const LIB={n:C.library,d:"Free computer help, large-print books and social programs."};
+ const H811={n:"Health811",d:"Free advice from a registered nurse by phone, day or night. Dial 811."};
+ const S211={n:"211 Ontario",d:"Free help finding any community service, in 150+ languages. Dial 211."};
+ const NEWS="If you came to Canada later in life, rules can differ. A settlement worker can check what applies to you.";
+ return [
+ {id:"s1",title:"Money and health basics",when:"Keep your income and health coverage in place. Taxes come first because benefits depend on them.",steps:[
+  {id:"stax",ic:"tax",t:"File your taxes every year",s:"Keeps your benefits coming",needs:[],
+   why:"Many seniors' benefits, including the Guaranteed Income Supplement and Ontario's tax credits, are based on your tax return. Filing every spring keeps them coming, even with low or no income.",
+   bring:["Your SIN","Pension and benefit slips (T4A, T4A(P), T4A(OAS))","Receipts for rent, property tax or medical costs"],
+   where:"Free tax clinics run every spring for seniors with modest income. Ask 211 or the library.",
+   tip:"Ask a family member or clinic volunteer to sign you up for online mail from the CRA, so slips don't get lost.",
+   notes:{family:"You can file for a parent with their permission. Ask the clinic about becoming their authorized representative.",newsenior:NEWS},
+   help:[{n:"Free tax clinics",d:"Volunteers file simple returns at no cost."},S211]},
+  {id:"pension",ic:"bank",t:"Pension and income benefits",s:"CPP, OAS and GIS",needs:["stax"],
+   why:"The Canada Pension Plan, Old Age Security and the Guaranteed Income Supplement are monthly payments for seniors. Ontario's GAINS adds more for low-income seniors.",
+   bring:["Your SIN","Bank account details for direct deposit","Proof of age and of years lived in Canada"],
+   where:"Apply through Service Canada, online or in person. Many people are enrolled automatically, so check your mail first.",
+   tip:"Ask Service Canada to review whether you get every benefit you qualify for. Missed months can sometimes be back-paid.",
+   notes:{family:"You can call Service Canada with your parent beside you, or get written consent to speak for them.",
+     newsenior:"Old Age Security usually needs at least 10 years of living in Canada after age 18. Some countries have agreements that can help. A settlement worker can check."},
+   help:[{n:"Service Canada",d:"Applications for CPP, OAS and GIS."},{n:"Free tax clinics",d:"Help with benefit forms too."}]},
+  {id:"ohips",ic:"health",t:"Health card and drug coverage",s:"OHIP and the Ontario Drug Benefit",needs:[],
+   why:"Your health card pays for doctors and hospitals. From age 65, the Ontario Drug Benefit covers most prescription drugs, usually with no extra application.",
+   bring:["Your current health card","ID with your name and signature"],
+   where:"Renew or replace your health card at ServiceOntario. Ask your pharmacist about your drug coverage.",
+   tip:"Check the expiry date on your health card. Renew before it runs out so you're never without coverage.",
+   notes:{newsenior:"Your OHIP coverage start date depends on your status. ServiceOntario will confirm."},
+   help:[{n:"Pharmacists",d:"Can explain your drug coverage and review all your medicines together."},H811]},
+  {id:"sdoc",ic:"doctor",t:"Family doctor",s:"Regular check-ups and care",needs:["ohips"],
+   why:"A family doctor helps you manage long-term health, medicines and referrals to specialists.",
+   bring:["Your health card","A list of your medicines"],
+   where:"Register with Health Care Connect, Ontario's program that matches you with a doctor. Use walk-in clinics while you wait.",
+   tip:"Bring a family member or friend to appointments if it helps you remember what was said.",notes:{},
+   help:[H811,{n:"Community Health Centres",d:"Team-based care, often with interpreters and social workers."}]},
+  {id:"dental",ic:"health",t:"Free dental care",s:"For seniors with lower income",needs:["stax"],
+   why:"The Ontario Seniors Dental Care Program and the federal Canadian Dental Care Plan cover dental care for many seniors.",
+   bring:["Your health card","Your most recent tax return"],
+   where:"Apply online or by mail, or ask your local public health unit for help.",
+   tip:"Eligibility is based on your income from your tax return, so file your taxes first.",notes:{newsenior:NEWS},
+   help:[{n:"Public health dental clinics",d:"Free care for eligible seniors."},S211]}
+ ]},
+ {id:"s2",title:"Help at home",when:"Support so you can live safely and comfortably at home.",steps:[
+  {id:"homecare",ic:"home",t:"Home care",s:"Nursing and personal support at home",needs:["ohips"],
+   why:"Ontario Health atHome arranges nursing, personal support and therapy at home, at no cost for people who qualify.",
+   bring:["Your health card","A list of your health needs and medicines"],
+   where:"Contact Ontario Health atHome, or ask your doctor or hospital for a referral.",
+   tip:"Ask for a care coordinator. They plan your care and can connect you with community programs.",
+   notes:{family:"Caregivers can call on their parent's behalf and join the care planning meeting."},
+   help:[{n:"Adult day programs",d:"Daytime activities and care, giving family caregivers a break."},S211]},
+  {id:"esther",ic:"settle",t:"Trusted local help",s:"Snow, cleaning, hair, meals and repairs",needs:[],
+   why:"Small jobs around the house get harder with age. Esther connects you by phone with trusted local businesses who can help.",
+   bring:["A short description of the job","Times that work for you"],
+   where:"Call Esther and describe what you need. Esther finds a local business and connects you. Now piloting in Barrie, coming to more communities.",
+   tip:"Ask for an \"Esther Approved\" business. They have agreed to treat seniors fairly and explain prices up front.",notes:{},
+   help:[{n:"Esther",d:"Call (249) 421-7788 or visit callesther.ca."},{n:"Community support agencies",d:"Many offer friendly visits and handy-person help."}]},
+  {id:"meals",ic:"food",t:"Meals and groceries",s:"Hot meals and food delivery",needs:[],
+   why:"Eating well can be hard when cooking or shopping gets difficult. Community programs can help.",
+   bring:["Your address","Any dietary needs, such as diabetic, halal or vegetarian"],
+   where:"Call 211 for Meals on Wheels and grocery delivery programs near you.",
+   tip:"Many programs offer culturally familiar meals. Ask what they have.",notes:{},
+   help:[{n:"Meals on Wheels",d:"Hot or frozen meals delivered to your door, often at low cost."},{n:"Food banks",d:"Free groceries; some deliver to seniors."}]},
+  {id:"safety",ic:"emerg",t:"Home safety and falls",s:"Prevent falls and stay safe",needs:[],
+   why:"Falls are a leading cause of injury for seniors. Small changes at home make a big difference.",
+   bring:["A list of risky spots at home, such as stairs or the bathtub"],
+   where:"Ask your doctor or home care coordinator about a home safety check and falls-prevention exercise classes.",
+   tip:"Grab bars, night lights and removing loose rugs are simple, low-cost fixes.",notes:{},
+   help:[{n:"Falls-prevention classes",d:"Free exercise classes for balance and strength."},{n:"Personal emergency alarms",d:"A button you wear to call for help."}]}
+ ]},
+ {id:"s3",title:"Getting around and staying connected",when:"Keep doing what you enjoy and stay close to people.",steps:[
+  {id:"stransit",ic:"bus",t:"Getting around",s:`Senior fares and accessible rides in ${C.n}`,needs:[],
+   why:"Transit is cheaper for seniors, and door-to-door rides are available if you can't use regular buses.",
+   bring:["Proof of age for senior fares","Your health card or ID"],
+   where:"See your options below. Accessible parking permits are issued by ServiceOntario.",options:C.transit,
+   tip:"Ask about a senior PRESTO card for discounted fares.",notes:{},
+   help:[{n:"Accessible Parking Permit",d:"Lets you park in accessible spaces. Your doctor signs the form."},{n:"Volunteer drivers",d:"Community agencies drive seniors to appointments."}]},
+  {id:"social",ic:"settle",t:"Seniors' centres and activities",s:"Friends, fitness and fun",needs:[],
+   why:"Staying social keeps your mind and body healthy. Seniors' centres offer classes, meals, trips and friendship.",
+   bring:["Nothing needed. Just drop in."],
+   where:`Ask 211 for seniors' active living centres in ${C.n}. ${C.library} also runs programs for seniors.`,
+   tip:"Many centres run groups in Mandarin, Cantonese, Tamil, Punjabi and other languages.",
+   notes:{newsenior:"Cultural community centres are a warm place to start and often run seniors' groups in your language."},
+   help:[LIB,{n:"Faith and cultural groups",d:"Many have seniors' clubs and visiting programs."}]}
+ ]},
+ {id:"s4",title:"Protect yourself and plan ahead",when:"Stay safe from scams and make your wishes known.",steps:[
+  {id:"scams",ic:"shield",t:"Scams and elder abuse",s:"Know the warning signs",needs:[],
+   why:"Scammers often target seniors by phone, text or at the door. Elder abuse can also come from people you know.",
+   bring:["Write down any suspicious calls or messages"],
+   where:"In danger, call 911. Otherwise, call 211 to reach elder abuse support in your language.",
+   tip:"Government agencies never ask for payment in gift cards or cryptocurrency. Hang up and call the official number yourself.",
+   notes:{family:"Watch for sudden money changes, new 'friends' or missed bills. Talk with your parent openly."},
+   help:[{n:"Canadian Anti-Fraud Centre",d:"Report a scam, even if you didn't lose money."},S211]},
+  {id:"poa",ic:"docs",t:"Power of attorney and wills",s:"Decide who speaks for you",needs:[],
+   why:"A power of attorney names someone you trust to make decisions if you can't. A will says what happens to your belongings.",
+   bring:["Names of the people you trust","ID"],
+   where:"Ontario's power of attorney forms are free from the government. A lawyer or community legal clinic can help.",
+   tip:"Talk with the people you choose before you name them, so they know your wishes.",
+   notes:{family:"You can help a parent prepare, but they must make the choices themselves."},
+   help:[{n:"Community legal clinics",d:"Free legal help for people with low income."},{n:"Legal Aid Ontario",d:"Can tell you where to get legal help."}]},
+  {id:"care",ic:"child",t:"Support for caregivers",s:"For family who help a senior",needs:[],
+   why:"Caring for a parent or partner is rewarding and tiring. Free support helps you keep going.",
+   bring:["A list of what you help with each week"],
+   where:"The Ontario Caregiver Organization offers free advice and support groups.",
+   tip:"Ask home care about respite: short breaks while someone else provides care.",notes:{},
+   help:[{n:"Ontario Caregiver Organization",d:"Free helpline and caregiver programs."},{n:"Adult day programs",d:"Care and activities during the day."}]}
+ ]}];
+}
+function buildJourney(city){ return S.aud==="senior"?buildSeniorSteps(city):buildSteps(city); }
+
+// ================= Location data (sample — verify before pilot) =================
+const CENTROIDS={markham:[43.8561,-79.3370],toronto:[43.6532,-79.3832],mississauga:[43.5890,-79.6441],brampton:[43.7315,-79.7624],vaughan:[43.8361,-79.4983],richmondhill:[43.8828,-79.4403]};
+const FSA={markham:["L3P","L3R","L3S","L3T","L6B","L6C","L6E","L6G"],richmondhill:["L4B","L4C","L4E","L4S"],vaughan:["L4H","L4J","L4K","L4L","L6A"],
+  mississauga:["L4T","L4V","L4W","L4X","L4Y","L4Z","L5A","L5B","L5C","L5E","L5G","L5H","L5J","L5K","L5L","L5M","L5N","L5R","L5T","L5V","L5W"],
+  brampton:["L6P","L6R","L6S","L6T","L6V","L6W","L6X","L6Y","L6Z","L7A"]};
+// Which office finishes each step, and known addresses (others open a map search near the person)
+const OFFICE_OF={pension:"servicecanada",ohips:"serviceontario",stransit:"serviceontario",homecare:"homecare",dental:"dental",social:"seniorcentre",poa:"legalclinic",sdoc:"walkin",sin:"servicecanada",ohip:"serviceontario",drive:"drivetest",settle:"settlement",bank:"bank",job:"employment",doctor:"walkin"};
+const OFFICE_Q={servicecanada:"Service Canada Centre",serviceontario:"ServiceOntario",drivetest:"DriveTest centre",settlement:"Newcomer settlement services",bank:"Bank branch",employment:"Employment Ontario",walkin:"Walk-in clinic",homecare:"Ontario Health atHome",dental:"Public health dental clinic",seniorcentre:"Seniors active living centre",legalclinic:"Community legal clinic"};
+const OFFICES={markham:{
+  serviceontario:{n:"ServiceOntario: Highway 7 and Galsworthy",addr:"5694 Highway 7, Unit 2A, Markham, ON L3P 1B4"},
+  servicecanada:{n:"Service Canada Centre: Markham",addr:"5051 Highway 7, Unit 14, Markham, ON"}}};
+function officeHtml(s){
+  const t=OFFICE_OF[s.id]; if(!t) return "";
+  const C=CITIES[S.city||"markham"]; const known=OFFICES[S.city]&&OFFICES[S.city][t];
+  const near=S.geo?S.geo.join(","):(S.postal||(C.n+", Ontario"));
+  const q=known?known.addr:(OFFICE_Q[t]+" near "+near);
+  const url="https://www.google.com/maps/search/?api=1&query="+encodeURIComponent(q);
+  return `<h4>${esc(u("nearest"))}</h4><div class="office"><span class="ic">${svg("pin")}</span><span><b>${esc(known?known.n:u("oq_"+t))}</b>${esc(known?known.addr:u("nearYou")+" "+(S.postal||C.n))}<a href="${url}" target="_blank" rel="noopener">${esc(u("openMap"))} ↗</a><a href="https://www.google.com/maps/dir/?api=1&travelmode=transit&destination=${encodeURIComponent(q)}${S.geo?"&origin="+S.geo.join(","):""}" target="_blank" rel="noopener">${esc(u("directions"))} ↗</a><small>${esc(u("checkHours"))}</small><button class="link" type="button" data-office="1" style="text-align:start;padding-inline:0">${esc(u("useOffice"))}</button></span></div>`;
+}
+
+// UI strings (translated with the steps)
+const UI_EN={
+ langQ:"Is this your language?",langOther:"Choose another language",detected:"Detected from your device",
+ cityQ:"Where are you landing?",citySub:"Your guide will show local buses, schools and services.",cityDetected:"Your device is set to Ontario time",
+ statusQ:"What document do you have?",statusSub:"This changes which steps apply to you. Esther never stores it.",
+ sayIt:"Or say it out loud",preparing:"Getting Esther ready in your language…",
+ title:"Your first steps in Canada",next:"Do this next",allDone:"You've finished every step. Welcome home.",
+ why:"Why it matters",bring:"What to bring",where:"Where to go",options:"Your options",forYou:"For you",tipL:"Tip",
+ listen:"Listen",markDone:"Mark as done",doneL:"Done",commonQ:"Ask Esther",askPh:"Ask Esther anything, in any language…",ask:"Ask",
+ progress:"{n} of {t} steps done",n911:"Emergency: police, fire, ambulance",n811:"Talk to a nurse, any time",n211:"Find any community service, 150+ languages",
+ change:"Change",foot:"Demo for Esther (callesther.ca). Sample information for Ontario; rules change and differ by status. A settlement worker can confirm what applies to you.",
+ cityPrompt:"Where are you landing? Tap your city.",statusPrompt:"What kind of document do you have? Tap the picture that matches.",
+ homePrompt:"Here are your first steps, in the right order. Start with the card at the top.",
+ skip:"Skip to main content",brandSub:"Newcomer guide · Independent community service, not a Government of Canada website",homeL:"Home",a11yL:"Accessibility",startOverL:"Start over (demo)",
+ a11yTitle:"Accessibility settings",textSize:"Text size",hcL:"High contrast",rmL:"Reduce motion",readL:"Read each step aloud automatically",ulL:"Underline all links",
+ a11yNote:"Designed to WCAG 2.0 Level AA, the web standard required under Ontario's AODA. Works with a keyboard alone and with screen readers. Settings are saved on this device.",
+ doneBtn:"Done",cfQ:"Start over?",cfBody:"This clears the language, city, document and progress on this device so you can run the demo again.",cfYes:"Yes, start over",cfNo:"Cancel",
+ officeBtn:"Translator",back:"Back",tag_markham:"One of Canada's most diverse cities",tag_toronto:"Canada's largest city",tag_mississauga:"Peel Region's largest city",tag_brampton:"The Flower City",tag_vaughan:"In York Region, next to Toronto",tag_richmondhill:"In York Region, north of Toronto",tag_other:"Ontario",rg_YorkRegion:"York Region",rg_CityofToronto:"City of Toronto",rg_PeelRegion:"Peel Region",rg_Ontario:"Ontario",cityOther:"Another Ontario city",oq_servicecanada:"Service Canada Centre",oq_serviceontario:"ServiceOntario",oq_drivetest:"DriveTest centre",oq_settlement:"Newcomer settlement services",oq_bank:"Bank branch",oq_employment:"Employment Ontario",oq_walkin:"Walk-in clinic",oq_homecare:"Ontario Health atHome",oq_dental:"Public health dental clinic",oq_seniorcentre:"Seniors active living centre",oq_legalclinic:"Community legal clinic",directions:"Directions by transit",audQ:"Who are these services for?",audSub:"Choose one. You can change it any time from the top of your guide.",audNew:"Newcomer to Canada",audNewS:"First steps after you land: documents, health card, housing, school and work",audSen:"Senior services",audSenS:"Living well in your community: benefits, health, help at home and staying connected",audPrompt:"Are you looking for newcomer services, or services for seniors? Tap a picture.",whoQ:"Who are you looking for help for?",whoSub:"This helps Esther show the right details for you.",whoPrompt:"Who are you looking for help for? Tap the picture that matches.",titleS:"Services for seniors in your community",darkL:"Dark mode",themeL:"Colour theme",thAuto:"Match my device",thLight:"Light",thDark:"Dark",welcomeTo:"Welcome to",insightsL:"Demo insights (for the Esther team)",officeTitle:"Talk at the office",officeSub:"Show this screen to the staff at the counter. Esther translates both ways and reads it aloud.",
+ officeEn:"Choose your language first, from Home, to translate to and from English.",translate:"Translate",play:"Play aloud",showStaff:"For staff (English)",forYouL:"For you",
+ phrasesL:"Quick phrases to show staff",close:"Close",typeHere:"Type here, or tap the microphone",officeNote:"For simple conversations only. For legal, medical or immigration matters, ask the office for a professional interpreter. Many offices offer one free.",
+ liveOff:"Live translation isn't available in this view.",liveDeclined:"Translation was declined. You can allow it from this page's permissions.",liveFail:"That translation didn't come through. Try again.",useOffice:"Use the translator at the counter",
+ phrases:["Hello. I am new to Canada.","I don't speak English well. Please speak slowly.","Is there an interpreter for my language?","I am here to apply for a health card.","I am here to apply for a SIN number.","Which documents do you need from me?","Can you write that down for me?","Where do I wait?","Thank you for your help.","I am here about my pension or Old Age Security.","I need help at home. Who can I talk to?"],needsL:"Do these first",waitL:"Do earlier steps first",simTag:"Simulated for demo",locAsk:"Asking your phone for permission…",locFind:"Finding your location…",detTitle:"What we detected",detLangSrc:"From your phone's language setting",detTz:"From your phone's time zone. This shows the province only.",detGps:"From your phone's location",detPostal:"From the postal code you entered",detNone:"Share your location or enter a postal code.",notDetected:"Location not detected yet",near:"Near",useLoc:"Use my location",pcPh:"Postal code, e.g. L3P 1B4",find:"Find",orChoose:"Or choose your city yourself",continueWith:"Continue with",detectedTag:"Detected",locFail:"Location sharing isn't available here. Enter your postal code instead.",pcBad:"That doesn't look like a Canadian postal code. Try a format like L3P 1B4.",nearest:"Nearest place to do this",nearYou:"Search near",openMap:"Open in Maps",checkHours:"Check hours before you go. Some offices need an appointment.",textOnly:"text only on this device",readyL:"You're ready for this step",helpL:"Community support for this step",noVoice:"This device has no voice for your language yet. Please read along."
+};
+
+// ================= State =================
+const S={lang:null,city:null,status:null,ui:UI_EN,phases:null,done:{},screen:"welcome"};
+try{const p=JSON.parse(localStorage.getItem("esther-profile")||"null"); if(p){S.lang=p.lang;S.city=p.city;S.status=p.status;S.done=p.done||{};S.postal=p.postal||null;S.geo=p.geo||null;S.langSrc=p.langSrc;S.locSrc=p.locSrc;S.aud=p.aud||(p.status?"newcomer":null);}}catch(e){}
+function persist(){try{localStorage.setItem("esther-profile",JSON.stringify({lang:S.lang,city:S.city,status:S.status,done:S.done,postal:S.postal,geo:S.geo,langSrc:S.langSrc,locSrc:S.locSrc,aud:S.aud}));}catch(e){}}
+const L=()=>LANGS.find(l=>l.c===S.lang)||LANGS[0];
+const app=document.getElementById("app");
+const esc=s=>String(s).replace(/[&<>"]/g,c=>({"&":"&amp;","<":"&lt;",">":"&gt;",'"':"&quot;"}[c]));
+const u=k=>S.ui[k]||UI_EN[k];
+
+// ================= Detection =================
+function detectLang(){
+  const prefs=(navigator.languages||[navigator.language||"en"]).map(x=>x.toLowerCase());
+  for(const p of prefs){
+    if(p.startsWith("zh")) return (p.includes("hk")||p.includes("hant")||p.includes("yue"))?"zh-HK":"zh-CN";
+    const m=LANGS.find(l=>l.c.toLowerCase().slice(0,2)===p.slice(0,2)); if(m) return m.c;
+  }
+  return "en-CA";
+}
+function detectOntario(){ try{const tz=Intl.DateTimeFormat().resolvedOptions().timeZone; return /Toronto|Nipigon|Thunder_Bay/.test(tz);}catch(e){return false;} }
+
+// ================= Voice =================
+let voicesReady=false; try{speechSynthesis.onvoiceschanged=()=>{voicesReady=true;};}catch(e){}
+let VOICES=[]; const loadVoices=()=>{try{VOICES=speechSynthesis.getVoices()||[];}catch(e){}};
+loadVoices(); try{speechSynthesis.addEventListener("voiceschanged",loadVoices);}catch(e){}
+function voiceFor(lang){ const l=lang.toLowerCase(), p=l.slice(0,2);
+  return VOICES.find(v=>v.lang.toLowerCase().replace("_","-")===l)||VOICES.find(v=>v.lang.toLowerCase().startsWith(p)); }
+function canSpeak(lang){ return ("speechSynthesis" in window) && (!!voiceFor(lang) || lang.startsWith("en")); }
+// Returns false when this device has no voice for the language, so we never read text aloud in the wrong voice.
+function speak(text,lang,onEnd){
+  try{ if(!("speechSynthesis" in window)){onEnd&&onEnd();return false;} loadVoices();
+    const v=voiceFor(lang); if(!v && !lang.startsWith("en")){onEnd&&onEnd();return false;}
+    speechSynthesis.cancel(); const ut=new SpeechSynthesisUtterance(text); ut.rate=0.9; ut.lang=v?v.lang:lang; if(v) ut.voice=v;
+    ut.onend=()=>onEnd&&onEnd(); ut.onerror=()=>onEnd&&onEnd(); speechSynthesis.speak(ut); return true;
+  }catch(e){onEnd&&onEnd();return false;}
+}
+function listen(btn,out,onText,lng){
+  const SR=window.SpeechRecognition||window.webkitSpeechRecognition;
+  const fail=()=>{btn.classList.remove("live"); if(out) out.textContent="Voice input isn't available here yet. Please tap instead.";};
+  if(!SR) return fail();
+  try{ const r=new SR(); r.lang=lng||S.lang||"en-CA"; r.interimResults=false; btn.classList.add("live"); if(out) out.textContent="…";
+    r.onresult=e=>{const t=e.results[0][0].transcript; if(out) out.textContent="“"+t+"”"; onText(t);};
+    r.onerror=fail; r.onend=()=>btn.classList.remove("live"); r.start();
+  }catch(e){fail();}
+}
+const norm=s=>s.toLowerCase().normalize("NFD").replace(/[̀-ͯ]/g,"");
+
+// ================= AI (translation + answers) =================
+let sample=null, sampleReady=(async()=>{try{sample=window.claude?await window.claude.use("sample"):null;}catch(e){sample=null;}})();
+// Merge a translation with its English source: "translated (English)". ids, icons and step links stay as-is.
+function bi(tr,en){
+  if(typeof tr==="string"&&typeof en==="string") return tr.trim()===en.trim()?tr:`${tr} (${en})`;
+  if(Array.isArray(tr)&&Array.isArray(en)) return tr.map((x,i)=>bi(x,en[i]));
+  if(tr&&en&&typeof tr==="object"&&typeof en==="object"){const o={}; for(const k in tr) o[k]=(k==="id"||k==="ic"||k==="needs")?tr[k]:bi(tr[k],en[k]); return o;}
+  return tr;
+}
+function applyStatic(){ document.querySelectorAll("[data-i18n]").forEach(el=>{el.textContent=u(el.dataset.i18n);}); document.documentElement.lang=(S.lang||"en").slice(0,2)==="zh"?S.lang:(S.lang||"en").slice(0,2); }
+function setTr(tr,en){ S.uiTr=tr.ui; S.phasesTr=tr.phases; S.ui=bi(tr.ui,UI_EN); S.phases=bi(tr.phases,en);
+  if(tr.status) tr.status.forEach(x=>{const s=statusList().find(y=>y.id===x.id); if(s){s.tt=bi(x.t,s.t);s.ts=bi(x.s,s.s);}}); }
+// ---- Fast translation: prefetch on the language screen, split into parallel jobs, share results across all visitors ----
+const TRV="tr11", TRQ={}; let CUR=null;
+const lsGet=k=>{try{return JSON.parse(localStorage.getItem(k)||"null");}catch(e){return null;}};
+const lsSet=(k,v)=>{try{localStorage.setItem(k,JSON.stringify(v));}catch(e){}};
+async function dbGetTr(id){ await dbReady; if(!DB) return null; try{const d=await DB.doc("translations/"+id).get(); return d.exists?d.data():null;}catch(e){return null;} }
+async function dbSetTr(id,v){ await dbReady; if(!DB) return; try{await DB.doc("translations/"+id).set({v,at:Date.now()});}catch(e){} }
+const TR_PROMPT=lang=>`Translate every English string value in this JSON into the language with BCP-47 code ${lang}, for a newcomer or senior in Canada. Use plain, warm, simple words. Keep these names in English: Service Canada, ServiceOntario, IRCC, OHIP, SIN, CPP, OAS, GIS, GAINS, PRESTO, GO Transit, TTC, YRT, Viva, MiWay, Züm, UP Express, CRA, DriveTest, Health Care Connect, Employment Ontario, Ontario Health atHome, Esther, school board and library names. Keep numbers like 911, 811, 211, phone numbers and the placeholders {n} and {t} exactly. Do not translate keys, "id", "ic" or "needs" values. Keep every array the same length and order. Return the same JSON structure only.\n\n`;
+// At most 6 translation calls at once; each piece is small so it returns quickly.
+let TR_ACTIVE=0; const TR_WAIT=[];
+const slot=()=>new Promise(r=>{ if(TR_ACTIVE<6){TR_ACTIVE++;r();} else TR_WAIT.push(r); });
+const free=()=>{ const n=TR_WAIT.shift(); if(n) n(); else TR_ACTIVE--; };
+function trJob(id,lang,src,check){
+  const key=TRV+"-"+id; if(TRQ[key]) return TRQ[key];
+  const job=(async()=>{
+    const ls=lsGet(key); if(ls&&check(ls)) return ls;
+    const d=await dbGetTr(key); if(d&&d.v&&check(d.v)){lsSet(key,d.v); return d.v;}
+    await sampleReady; if(!sample) return null;
+    await slot();
+    try{ const out=await sample.json(TR_PROMPT(lang)+JSON.stringify(src()),{modelTier:"quick"});
+      if(out&&check(out)){ lsSet(key,out); dbSetTr(key,out); return out; } }catch(e){} finally{ free(); }
+    return null;
+  })();
+  TRQ[key]=job; job.then(v=>{if(!v) delete TRQ[key];}); return job;
+}
+const chunk=(obj,n)=>{const ks=Object.keys(obj),size=Math.ceil(ks.length/n),out=[]; for(let i=0;i<ks.length;i+=size){const o={}; ks.slice(i,i+size).forEach(k=>o[k]=obj[k]); out.push(o);} return out;};
+function uiJob(lang){
+  const parts=chunk(UI_EN,4).map((p,i)=>trJob("ui"+i+"-"+lang,lang,()=>({ui:p}),o=>o&&o.ui));
+  const st=trJob("st-"+lang,lang,()=>({status:STATUS.concat(WHO).map(s=>({id:s.id,t:s.t,s:s.s}))}),o=>o&&Array.isArray(o.status));
+  return Promise.all([...parts,st]).then(r=>r.every(Boolean)?{ui:Object.assign({},...r.slice(0,-1).map(x=>x.ui)),status:r[r.length-1].status}:null);
+}
+function stepsJob(lang,aud,city){
+  const en=(aud==="senior"?buildSeniorSteps:buildSteps)(city);
+  return Promise.all(en.map(ph=>trJob(aud+"-"+ph.id+"-"+lang+"-"+city,lang,()=>({phase:ph}),o=>o&&o.phase&&Array.isArray(o.phase.steps)))).then(r=>r.every(Boolean)?{phases:r.map(x=>x.phase)}:null);
+}
+function prefetch(lang){ if(!lang||lang.startsWith("en")) return; const c=S.city||"markham"; uiJob(lang); stepsJob(lang,"newcomer",c); stepsJob(lang,"senior",c); }
+function applyUi(out){ S.uiTr=out.ui; S.ui=bi(out.ui,UI_EN);
+  out.status.forEach(x=>{const s=STATUS.concat(WHO).find(y=>y.id===x.id); if(s){s.tt=bi(x.t,s.t);s.ts=bi(x.s,s.s);}}); applyStatic(); }
+function applySteps(out,en){ S.phasesTr=out.phases; S.phases=bi(out.phases,en); }
+const within=(p,ms)=>Promise.race([p,new Promise(r=>setTimeout(()=>r(undefined),ms))]);
+async function loadLanguage(){
+  const en=buildJourney(S.city||"markham"); S.phases=en; S.phasesTr=en; S.ui=UI_EN; S.uiTr=UI_EN; STATUS.concat(WHO).forEach(s=>{delete s.tt;delete s.ts;});
+  if(!S.lang||S.lang.startsWith("en")){applyStatic();return;}
+  const want=[S.lang,S.aud,S.city].join("|"); const ui=uiJob(S.lang), st=stepsJob(S.lang,S.aud||"newcomer",S.city||"markham");
+  const u1=await within(ui,25000); if(u1) applyUi(u1); else applyStatic();
+  const s1=await within(st,25000); if(s1) applySteps(s1,en);
+  // Not ready yet: carry on in English and swap the translation in the moment it lands.
+  if(!u1||!s1) Promise.all([ui,st]).then(([a,b])=>{ if([S.lang,S.aud,S.city].join("|")!==want) return;
+    if(a) applyUi(a); if(b) applySteps(b,buildJourney(S.city||"markham"));
+    const sh=document.getElementById("sheet"); if(CUR&&(!sh||sh.hidden)) CUR(); });
+}
+const rg=r=>u("rg_"+r.replace(/\W/g,""))||r;
+let SCR="welcome";
+const backHtml=()=>`<button class="link back" type="button" data-back="1">${document.documentElement.dir==="rtl"?"→":"←"} ${esc(u("back"))}</button>`;
+function goBack(){ try{speechSynthesis.cancel()}catch(e){}
+  ({lang:()=>screenWelcome(),aud:()=>screenLang(S.lang,false),city:()=>screenAudience(),status:()=>screenCity(" "),home:()=>screenStatus(true)}[SCR]||screenWelcome)(); window.scrollTo(0,0); }
+document.addEventListener("click",e=>{ if(e.target.closest&&e.target.closest("[data-back]")) goBack(); });
+const uT=k=>(S.uiTr&&S.uiTr[k])||UI_EN[k];
+const ua=k=>u(k);
+
+// ================= Screens =================
+function dots(i){return `<div class="dots" aria-hidden="true">${[0,1,2,3].map(k=>`<i class="${k<=i?"on":""}"></i>`).join("")}</div>`;}
+function setDir(){const rtl=L().rtl; document.documentElement.dir=rtl?"rtl":"ltr"; document.documentElement.lang=S.lang||"en";}
+
+function screenWelcome(){
+  document.body.className="onb"; document.documentElement.dir="ltr";
+  const guess=S.lang||detectLang(); S.lang=guess;
+  app.innerHTML=`<div class="onb-wrap">
+    <p class="hello" id="hello" lang="${guess}">${esc((LANGS.find(l=>l.c===guess)||LANGS[0]).hi)}</p>
+    <button class="orb" id="orb" type="button" aria-label="Tap to hear Esther">${svg("speak",2)}<span>Tap to start</span></button>
+    <span class="detect">${svg("globe",2)} ${esc((LANGS.find(l=>l.c===guess)||LANGS[0]).n)}</span><p class="sub">Esther speaks first. Tap the circle and listen.</p><p class="small"><a href="#insights">Demo insights (for the Esther team)</a></p></div>`;
+  let i=Math.max(0,LANGS.findIndex(l=>l.c===guess)); const h=document.getElementById("hello");
+  const tick=setInterval(()=>{ if(!document.body.contains(h)) return clearInterval(tick); i=(i+1)%LANGS.length; h.style.opacity=0; setTimeout(()=>{h.textContent=LANGS[i].hi;h.style.opacity=1;},350);},1800);
+  document.getElementById("orb").onclick=()=>{clearInterval(tick); screenLang(guess,true);};
+  SCR="welcome"; prefetch(guess);
+}
+
+function screenLang(code,auto){
+  SCR="lang";
+  S.lang=code; S.langSrc=auto?"device":"manual"; setDir(); const lg=L();
+  app.innerHTML=`<div class="onb-wrap">${backHtml()}${dots(0)}
+    <span class="detect">${svg("globe",2)} ${auto?"Detected from your phone's language setting":"You chose"}</span>
+    <p class="hello">${esc(lg.hi)}</p><p class="sub" lang="${lg.c}" style="font-size:20px;color:var(--fg)">${esc(lg.say)}</p><p class="heard" id="nv"></p>
+    <button class="orb talking" id="orb" type="button" aria-label="Hear again">${svg("speak",2)}<span>${esc(lg.n)}</span></button>
+    <div class="row"><button class="btn" id="yes" type="button">${esc(lg.yes)}</button></div>
+    <p class="prompt" style="font-size:20px;margin-top:6px">Choose another language</p>
+    <div class="choices" id="list">${LANGS.map(l=>`<button class="choice ${l.c===code?"sel":""}" type="button" data-c="${l.c}" lang="${l.c}"><b>${esc(l.n)}</b><small>${esc(l.hi)}</small>${(GREET_AUDIO[l.c]||canSpeak(l.c))?"":`<span class="dtag mute">${esc(UI_EN.textOnly)}</span>`}</button>`).join("")}</div></div>`;
+  const orb=document.getElementById("orb");
+  const play=()=>{orb.classList.add("talking"); if(GREET_AUDIO[lg.c]){try{if(window._ga)window._ga.pause();speechSynthesis.cancel();}catch(e){} const au=new Audio(GREET_AUDIO[lg.c]); window._ga=au; au.onended=au.onerror=()=>orb.classList.remove("talking"); au.play().catch(()=>orb.classList.remove("talking")); return;} if(!speak(lg.say,lg.c,()=>orb.classList.remove("talking"))){orb.classList.remove("talking"); document.getElementById("nv").textContent="No "+lg.n+" voice on this device yet. Please read along above.";}};
+  play(); orb.onclick=play; prefetch(code);
+  document.querySelectorAll("#list .choice").forEach(b=>b.onclick=()=>screenLang(b.dataset.c,false));
+  document.getElementById("yes").onclick=async()=>{
+    persist(); app.innerHTML=`<div class="onb-wrap loading"><div class="spinner"></div><p class="sub">${S.lang.startsWith("en")?"Getting Esther ready…":"…"}</p></div>`;
+    S.city=S.city||"markham"; await loadLanguage(); screenAudience();
+  };
+}
+
+const WHO=[
+ {id:"self",ic:"senior",t:"Myself",s:"I am a senior"},
+ {id:"family",ic:"settle",t:"A parent or family member",s:"I help care for a senior"},
+ {id:"newsenior",ic:"globe",t:"A senior new to Canada",s:"Recently arrived or sponsored by family"}
+];
+const statusList=()=>S.aud==="senior"?WHO:STATUS;
+function screenAudience(){
+  SCR="aud"; CUR=screenAudience; setDir(); document.body.className="onb";
+  const opts=[{id:"newcomer",ic:"globe",t:u("audNew"),s:u("audNewS")},{id:"senior",ic:"senior",t:u("audSen"),s:u("audSenS")}];
+  app.innerHTML=`<div class="onb-wrap">${backHtml()}${dots(1)}
+    <p class="prompt">${esc(u("audQ"))}</p><p class="sub">${esc(u("audSub"))}</p>${canSpeak(S.lang)?"":`<p class="heard">${esc(u("noVoice"))}</p>`}
+    <div class="choices aud" id="list">${opts.map(o=>`<button class="choice ${o.id===S.aud?"sel":""}" type="button" data-k="${o.id}"><span class="ic">${svg(o.ic)}</span><b>${esc(o.t)}</b><small>${esc(o.s)}</small></button>`).join("")}</div></div>`;
+  speak(uT("audPrompt"),S.lang);
+  document.querySelectorAll("#list .choice").forEach(b=>b.onclick=async()=>{
+    const k=b.dataset.k; const changed=k!==S.aud; S.aud=k; if(changed){S.status=null;S.done={};} persist();
+    if(changed&&!S.lang.startsWith("en")) app.innerHTML=`<div class="onb-wrap loading"><div class="spinner"></div><p class="sub">${esc(u("preparing"))}</p></div>`;
+    await loadLanguage(); screenCity();
+  });
+}
+function cityFromPostal(pc){ pc=(pc||"").toUpperCase().replace(/\s/g,""); if(!/^[A-Z]\d[A-Z]/.test(pc)) return null;
+  const f=pc.slice(0,3); if(f[0]==="M") return "toronto"; for(const k in FSA) if(FSA[k].includes(f)) return k; return "other"; }
+function nearestCity(lat,lng){ let best="other",bd=1e9; for(const k in CENTROIDS){const [a,b]=CENTROIDS[k]; const d=Math.hypot(a-lat,(b-lng)*Math.cos(lat*Math.PI/180))*111; if(d<bd){bd=d;best=k;}} return bd<35?best:"other"; }
+function screenCity(msg){
+  SCR="city"; CUR=()=>screenCity(" "); setDir(); const ont=detectOntario(); if(!S.locSrc) S.locSrc=ont?"tz":"manual"; applyCity(); const order=["markham","toronto","mississauga","brampton","vaughan","richmondhill","other"];
+  const C=CITIES[S.city||"markham"];
+  let where,src;
+  if(S.geo){where=u("near")+" "+C.n;src=u("detGps");}
+  else if(S.postal){where=S.postal+" · "+C.n;src=u("detPostal");}
+  else if(ont){where="Ontario";src=u("detTz");}
+  else {where=u("notDetected");src=u("detNone");}
+  const pinned=!!(S.geo||S.postal);
+  app.innerHTML=`<div class="onb-wrap">${backHtml()}${dots(2)}
+    <p class="prompt">${esc(u("cityQ"))}</p><p class="sub">${esc(u("citySub"))}</p>
+    <div class="detected">
+      <p class="dtitle">${esc(u("detTitle"))}</p>
+      <div class="drow"><span class="ic">${svg("globe")}</span><span><b>${esc(L().n)}</b><small>${esc(u("detLangSrc"))}</small></span><button class="link" type="button" id="chLang">${esc(u("change"))}</button></div>
+      <div class="drow"><span class="ic">${svg("pin")}</span><span><b>${esc(where)}</b>${S.geo?` <span class="dtag sim">${esc(u("simTag"))}</span>`:""}<small>${esc(src)}</small></span></div>
+      <div class="locin">
+        <button class="btn ghost" type="button" id="gps">${svg("pin",2).replace('<svg','<svg style="width:18px;height:18px;vertical-align:-3px"')} ${esc(u("useLoc"))}</button>
+        <form id="pcf"><label class="vh" for="pc">${esc(u("pcPh"))}</label><input id="pc" autocomplete="postal-code" placeholder="${esc(u("pcPh"))}" maxlength="7" value="${esc(S.postal||"")}"><button class="btn" type="submit">${esc(u("find"))}</button></form>
+      </div>
+      <p class="heard" id="locmsg">${esc(msg||"")}</p>
+      ${pinned?`<button class="btn" type="button" id="cont">${esc(u("continueWith"))} ${esc(C.n)}</button>`:""}
+    </div>
+    <p class="sub">${esc(u("orChoose"))}</p>
+    <div class="choices" id="list">${order.map(k=>`<button class="choice ${k===(S.city||"markham")?"sel":""}" type="button" data-k="${k}"><span class="ic">${svg(k==="other"?"globe":"pin")}</span><b>${esc(k==="other"?u("cityOther"):CITIES[k].n)}</b><small>${esc(rg(CITIES[k].region))}</small>${pinned&&k===S.city?`<span class="dtag">${esc(u("detectedTag"))}</span>`:""}</button>`).join("")}</div>
+    <div class="row"><button class="mic" id="mic" type="button" aria-label="${esc(u("sayIt"))}">${svg("mic",2)}</button></div>
+    <p class="heard" id="heard">${esc(u("sayIt"))}</p></div>`;
+  if(!msg) speak(uT("cityPrompt"),S.lang);
+  const go=async k=>{const changed=k!==S.city; S.city=k; persist(); if(changed&&!S.lang.startsWith("en")){app.innerHTML=`<div class="onb-wrap loading"><div class="spinner"></div><p class="sub">${esc(u("preparing"))}</p></div>`;} await loadLanguage(); screenStatus();};
+  document.querySelectorAll("#list .choice").forEach(b=>b.onclick=()=>{ if(b.dataset.k!==S.city){S.geo=null;S.postal=null;S.locSrc="manual";} go(b.dataset.k); });
+  document.getElementById("chLang").onclick=()=>screenLang(S.lang,false);
+  const cont=document.getElementById("cont"); if(cont) cont.onclick=()=>go(S.city);
+  document.getElementById("pcf").onsubmit=e=>{e.preventDefault(); const v=document.getElementById("pc").value; const k=cityFromPostal(v);
+    if(!k){document.getElementById("locmsg").textContent=u("pcBad");return;}
+    S.postal=v.toUpperCase().replace(/\s/g,"").replace(/^(...)(...)$/,"$1 $2"); S.geo=null; S.city=k; S.locSrc="postal"; applyCity(); persist(); screenCity(" ");};
+  document.getElementById("gps").onclick=()=>{ const m=document.getElementById("locmsg"); m.textContent="…";
+    // DEMO: emulates the phone's permission prompt and a GPS fix in central Markham. In the real app this is navigator.geolocation with consent.
+    m.textContent=u("locAsk"); const btn=document.getElementById("gps"); btn.disabled=true;
+    setTimeout(()=>{m.textContent=u("locFind");},1100);
+    setTimeout(()=>{S.geo=[43.8563,-79.3370];S.postal=null;S.locSrc="gps";S.city=nearestCity(S.geo[0],S.geo[1]);applyCity();persist();screenCity(" ");},2300);};
+  document.getElementById("mic").onclick=e=>listen(e.currentTarget,document.getElementById("heard"),t=>{
+    const n=norm(t); const k=Object.keys(CITIES).find(k=>n.includes(norm(CITIES[k].n))); if(k) go(k);});
+}
+
+function screenStatus(quiet){
+  SCR="status"; CUR=()=>screenStatus(true); setDir();
+  app.innerHTML=`<div class="onb-wrap">${backHtml()}${dots(3)}
+    <p class="prompt">${esc(u(S.aud==="senior"?"whoQ":"statusQ"))}</p><p class="sub">${esc(u(S.aud==="senior"?"whoSub":"statusSub"))}</p>${canSpeak(S.lang)?"":`<p class="heard">${esc(u("noVoice"))}</p>`}
+    <div class="choices" id="list">${statusList().map(s=>`<button class="choice ${s.id===S.status?"sel":""}" type="button" data-k="${s.id}"><span class="ic">${svg(s.ic)}</span><b>${esc(s.tt||s.t)}</b><small>${esc(s.ts||s.s)}</small></button>`).join("")}</div>
+    <div class="row"><button class="mic" id="mic" type="button" aria-label="${esc(u("sayIt"))}">${svg("mic",2)}</button></div>
+    <p class="heard" id="heard">${esc(u("sayIt"))}</p></div>`;
+  if(!quiet) speak(uT(S.aud==="senior"?"whoPrompt":"statusPrompt"),S.lang);
+  const pick=k=>{S.status=k; persist(); track(()=>{}); screenHome(true);};
+  document.querySelectorAll("#list .choice").forEach(b=>b.onclick=()=>pick(b.dataset.k));
+  document.getElementById("mic").onclick=e=>listen(e.currentTarget,document.getElementById("heard"),t=>{
+    const n=norm(t); const k=/work|trabajo|travail/.test(n)?"work":/stud|estudi|etud/.test(n)?"study":/refug|asyl/.test(n)?"refugee":/perman|pr card|resid/.test(n)?"pr":null; if(k) pick(k);});
+}
+
+// ================= Guide =================
+const ALL=()=>S.phases.flatMap(p=>p.steps);
+function screenHome(spoken){
+  SCR="home"; CUR=()=>screenHome(false);
+  document.body.className=""; setDir();
+  const SL=statusList(); const st=SL.find(s=>s.id===S.status)||SL[SL.length-1]; const C=CITIES[S.city||"markham"];
+  app.innerHTML=`<div class="wrap">
+    ${backHtml()}
+    <div class="top">
+      <div class="who">
+        <button class="pill" type="button" data-go="aud">${svg(S.aud==="senior"?"senior":"globe",2)} ${esc(u(S.aud==="senior"?"audSen":"audNew"))}</button>
+        <button class="pill" type="button" data-go="lang">${svg("globe",2)} ${esc(L().n)}</button>
+        <button class="pill city" type="button" data-go="city">${svg("pin",2)} ${esc(S.postal?S.postal+" · "+C.n:C.n)}</button>
+        <button class="pill" type="button" data-go="status">${svg(st.ic,2)} ${esc(st.tt||st.t)}</button>
+      </div>
+      <div class="progress"><span id="prog"></span><div class="bar"><span id="barfill"></span></div></div>
+    </div>
+    <h1>${esc(u(S.aud==="senior"?"titleS":"title"))}</h1>
+    <div class="cityban"><span class="cmark" aria-hidden="true">${esc(C.n[0])}</span><span><b>${esc(u("welcomeTo"))} ${esc(C.n)}</b><small>${esc(u("tag_"+(S.city||"other")))} · ${esc(rg(C.region))}</small></span></div>
+    <div id="next"></div>
+    <div class="emerg">
+      <div class="num"><b>911</b><span>${esc(u("n911"))}</span></div>
+      <div class="num"><b>811</b><span>${esc(u("n811"))}</span></div>
+      <div class="num"><b>211</b><span>${esc(u("n211"))}</span></div>
+    </div>
+    ${S.phases.map(p=>`<section class="phase"><h2>${esc(p.title)}</h2><p class="when">${esc(p.when)}</p>
+      <div class="grid">${p.steps.map(s=>`<button class="tile" type="button" data-step="${s.id}">
+        <span class="check">${svg("check",3)}</span><span class="ic">${svg(s.ic)}</span><b>${esc(s.t)}</b><small>${esc(s.s)}</small><span class="wl">${esc(u("waitL"))}</span></button>`).join("")}</div></section>`).join("")}
+    <div class="foot"><p>${esc(u("foot"))}</p><p><a href="#insights">${esc(u("insightsL"))}</a></p></div>
+  </div>
+  <div class="scrim" id="scrim" hidden></div>
+  <aside class="sheet" id="sheet" hidden role="dialog" aria-modal="true" aria-labelledby="sTitle"></aside>
+  <div class="askbar"><div class="in">
+    <div class="answer" id="answer" hidden aria-live="polite"></div>
+    <form class="ask" id="ask">
+      <button class="mic" id="amic" type="button" aria-label="${esc(u("sayIt"))}">${svg("mic",2)}</button>
+      <input id="q" type="text" autocomplete="off" placeholder="${esc(u("askPh"))}" aria-label="${esc(u("askPh"))}">
+      <button class="btn" type="submit">${esc(u("ask"))}</button>
+    </form></div></div>`;
+  document.querySelectorAll(".tile").forEach(b=>b.onclick=()=>openStep(b.dataset.step));
+  document.querySelectorAll("[data-go]").forEach(b=>b.onclick=()=>{try{speechSynthesis.cancel()}catch(e){} const g=b.dataset.go; g==="aud"?screenAudience():g==="lang"?screenLang(S.lang,false):g==="city"?screenCity():screenStatus();});
+  document.getElementById("scrim").onclick=closeStep;
+  document.getElementById("ask").onsubmit=e=>{e.preventDefault();ask(document.getElementById("q").value);};
+  document.getElementById("amic").onclick=e=>listen(e.currentTarget,null,t=>{document.getElementById("q").value=t;ask(t);});
+  refresh();
+  if(spoken) speak(uT("homePrompt"),S.lang);
+}
+function refresh(){
+  const all=ALL(); const n=all.filter(s=>S.done[s.id]).length;
+  document.getElementById("prog").textContent=u("progress").replace(/\{n\}/g,n).replace(/\{t\}/g,all.length);
+  document.getElementById("barfill").style.width=(n/all.length*100)+"%";
+  const ready=s=>(s.needs||[]).every(n=>S.done[n]);
+  all.forEach(s=>{const el=document.querySelector(`[data-step="${s.id}"]`); if(el){el.classList.toggle("done",!!S.done[s.id]); el.classList.toggle("wait",!S.done[s.id]&&!ready(s));}});
+  const nx=all.find(s=>!S.done[s.id]&&ready(s))||all.find(s=>!S.done[s.id]); const box=document.getElementById("next");
+  box.innerHTML= nx?`<button class="next" type="button" id="nextBtn"><span class="ic">${svg(nx.ic)}</span><span><small>${esc(u("next"))}</small><b>${esc(nx.t)}</b><span class="s">${esc(nx.s)}</span></span><span class="go" aria-hidden="true">${document.documentElement.dir==="rtl"?"←":"→"}</span></button>`
+    :`<div class="next"><span class="ic">${svg("check",2)}</span><b>${esc(u("allDone"))}</b></div>`;
+  if(nx) document.getElementById("nextBtn").onclick=()=>openStep(nx.id);
+}
+function stepText(s){
+  const p=(S.phasesTr?S.phasesTr.flatMap(x=>x.steps).find(x=>x.id===s.id):null)||s;
+  let t=`${p.t}. ${p.why} ${uT("bring")}: ${p.bring.join("; ")}. ${uT("where")}: ${p.where}`;
+  if(p.options) t+=" "+p.options.map(o=>o.n+": "+o.d).join(" ");
+  const note=p.notes&&p.notes[S.status]; if(note) t+=" "+note;
+  return t+" "+uT("tipL")+": "+p.tip;
+}
+let lastFocus=null;
+function openStep(id){
+  const s=ALL().find(x=>x.id===id); track(d=>{d.opened[id]=(d.opened[id]||0)+1;}); lastFocus=document.activeElement; const note=s.notes&&s.notes[S.status];
+  const sh=document.getElementById("sheet");
+  sh.innerHTML=`<div class="sheet-h"><span class="ic">${svg(s.ic)}</span><h3 id="sTitle">${esc(s.t)}</h3><button class="close" id="close" type="button">Close ×</button></div>
+    ${note?`<div class="note"><b>${esc(u("forYou"))}:</b> ${esc(note)}</div>`:""}
+    ${needsHtml(s)}<h4>${esc(u("why"))}</h4><p>${esc(s.why)}</p>
+    <h4>${esc(u("bring"))}</h4><ul>${s.bring.map(b=>`<li>${esc(b)}</li>`).join("")}</ul>
+    <h4>${esc(u("where"))}</h4><p>${esc(s.where)}</p>${officeHtml(s)}
+    ${s.options?`<h4>${esc(u("options"))}</h4><div class="opts">${s.options.map(o=>`<div class="opt"><b>${esc(o.n)}</b>${esc(o.d)}</div>`).join("")}</div>`:""}
+    <div class="tip"><b>${esc(u("tipL"))}:</b> ${esc(s.tip)}</div>
+    ${helpHtml(s)}<div class="actions">
+      <button class="btn ghost" id="bListen" type="button">${svg("speak",2).replace('<svg','<svg style="width:18px;height:18px;vertical-align:-3px"')} ${esc(u("listen"))}</button>
+      <button class="btn ${S.done[s.id]?"done":"ghost"}" id="bDone" type="button">${S.done[s.id]?"✓ "+esc(u("doneL")):esc(u("markDone"))}</button>
+      <button class="btn" id="bAsk" type="button">${esc(u("commonQ"))}</button>
+    </div>`;
+  document.getElementById("close").onclick=closeStep;
+  document.querySelectorAll("[data-need]").forEach(b=>b.onclick=()=>openStep(b.dataset.need));
+  const ob=sh.querySelector("[data-office]"); if(ob) ob.onclick=()=>{closeStep();openOffice();};
+  document.getElementById("bListen").onclick=()=>speak(stepText(s),S.lang);
+  document.getElementById("bDone").onclick=e=>{S.done[s.id]=!S.done[s.id];persist();refresh();track(d=>{if(S.done[s.id]) d.done[s.id]=1; else delete d.done[s.id];});e.currentTarget.className="btn "+(S.done[s.id]?"done":"ghost");e.currentTarget.textContent=S.done[s.id]?"✓ "+u("doneL"):u("markDone");};
+  document.getElementById("bAsk").onclick=()=>{closeStep(); const q=document.getElementById("q"); q.focus(); q.dataset.step=s.id;};
+  document.getElementById("scrim").hidden=false; sh.hidden=false; document.getElementById("close").focus();
+  if(A.read) speak(stepText(s),S.lang);
+}
+function needsHtml(s){
+  if(!s.needs||!s.needs.length) return "";
+  const all=ALL(); const open=s.needs.filter(n=>!S.done[n]);
+  if(!open.length) return `<p class="ready">${svg("check",3)} ${esc(u("readyL"))}</p>`;
+  return `<div class="needs"><b>${esc(u("needsL"))}</b><div class="qs">${open.map(n=>{const x=all.find(y=>y.id===n);return `<button class="chip" type="button" data-need="${n}">${esc(x?x.t:n)}</button>`;}).join("")}</div></div>`;
+}
+function helpHtml(s){
+  if(!s.help||!s.help.length) return "";
+  return `<h4>${esc(u("helpL"))}</h4><div class="help">${s.help.map(h=>`<div class="hcard"><span class="ic">${svg("settle")}</span><span><b>${esc(h.n)}</b>${esc(h.d)}</span></div>`).join("")}</div>`;
+}
+function closeStep(){document.getElementById("sheet").hidden=true;document.getElementById("scrim").hidden=true;try{speechSynthesis.cancel()}catch(e){} if(lastFocus) lastFocus.focus();}
+document.addEventListener("keydown",e=>{const oi=document.getElementById("officeUi"); if(e.key==="Escape"&&oi&&!oi.hidden) return closeOffice(); const sh=document.getElementById("sheet"); if(!sh||sh.hidden) return;
+  if(e.key==="Escape") return closeStep();
+  if(e.key==="Tab"){const f=[...sh.querySelectorAll('button,a[href],input')].filter(x=>!x.disabled); if(!f.length) return;
+    const first=f[0],last=f[f.length-1]; if(e.shiftKey&&document.activeElement===first){e.preventDefault();last.focus();} else if(!e.shiftKey&&document.activeElement===last){e.preventDefault();first.focus();}}});
+
+async function ask(q){
+  q=(q||"").trim(); if(!q) return; const input=document.getElementById("q"); const stepId=input.dataset.step; input.value=""; delete input.dataset.step;
+  track(d=>{d.asks++;}); const a=document.getElementById("answer"); a.hidden=false; a.innerHTML=`<span class="lbl">Esther</span><span id="ans">…</span>`;
+  await sampleReady;
+  if(!sample){document.getElementById("ans").textContent="Live answers aren't available in this view. For help now, call 211 and ask for newcomer settlement services.";return;}
+  const step=stepId?ALL().find(s=>s.id===stepId):null; const C=CITIES[S.city||"markham"]; const st=statusList().find(s=>s.id===S.status);
+  try{
+    const r=await sample(`You are Esther, a warm, patient guide ${S.aud==="senior"?"to services for seniors living in":"for newcomers who just arrived in"} ${C.n}, Ontario, Canada. The person is: ${st?st.t:"unknown"}. Answer in the language they write in; if unclear, use the language with code ${S.lang}. Maximum 80 words, spoken style, plain words, no markdown, no lists. If you answer in a language other than English, add a new line starting with "English:" and give the same answer in English.
+Rules: general orientation only. Never give immigration-status, legal, medical or tax advice; for those, point to a settlement worker (via 211), 811, a licensed immigration consultant or lawyer, or a free tax clinic. If anyone is in danger, say call 911 first. Never invent phone numbers, addresses, fees or dates; if a rule or amount may have changed, say so and name who can confirm.
+Local transit: ${C.transit.map(t=>t.n).join(", ")}. School boards: ${C.boards}. Library: ${C.library}.
+${step?"They are reading the step: "+stepText(step):""}
+Question: ${q}`,{modelTier:"quick",cache:false,onText:({text})=>{document.getElementById("ans").textContent=text;}});
+    document.getElementById("ans").textContent=r.text; speak(r.text.split(/\n\s*English:/)[0],S.lang);
+  }catch(e){document.getElementById("ans").textContent=e&&e.code==="not_granted"?"Live answers were declined. You can allow them from this page's permissions.":"That answer didn't come through. Try again in a moment.";}
+}
+
+// ================= Accessibility settings (saved per device) =================
+const A={ts:0,hc:false,rm:false,read:true,ul:false};
+try{Object.assign(A,JSON.parse(localStorage.getItem("esther-a11y")||"{}"));}catch(e){}
+function applyA(){const h=document.documentElement; h.classList.remove("ts-1","ts-2"); if(A.ts) h.classList.add("ts-"+A.ts);
+  h.classList.toggle("hc",A.hc); h.classList.toggle("rm",A.rm); h.classList.toggle("ul",A.ul);
+  document.querySelectorAll("[data-ts]").forEach(b=>b.setAttribute("aria-pressed",String(+b.dataset.ts===A.ts)));
+  document.getElementById("optHc").checked=A.hc; document.getElementById("optRm").checked=A.rm; document.getElementById("optRead").checked=A.read; document.getElementById("optUl").checked=A.ul;
+  try{localStorage.setItem("esther-a11y",JSON.stringify(A));}catch(e){}}
+document.querySelectorAll("[data-ts]").forEach(b=>b.onclick=()=>{A.ts=+b.dataset.ts;applyA();});
+[["optHc","hc"],["optRm","rm"],["optRead","read"],["optUl","ul"]].forEach(([id,k])=>document.getElementById(id).onchange=e=>{A[k]=e.target.checked;applyA();});
+const a11yP=document.getElementById("a11y"), a11yB=document.getElementById("a11yBtn");
+a11yB.onclick=()=>{a11yP.hidden=!a11yP.hidden; a11yB.setAttribute("aria-expanded",String(!a11yP.hidden)); if(!a11yP.hidden) a11yP.querySelector("button").focus();};
+document.getElementById("a11yClose").onclick=()=>{a11yP.hidden=true;a11yB.setAttribute("aria-expanded","false");a11yB.focus();};
+applyA();
+
+// ================= Home + demo reset =================
+document.getElementById("goHome").onclick=()=>{try{speechSynthesis.cancel()}catch(e){} document.getElementById("confirm").hidden=true; window.scrollTo(0,0); screenWelcome();};
+document.getElementById("startOver").onclick=()=>{const c=document.getElementById("confirm"); c.hidden=false; document.getElementById("cfYes").focus(); window.scrollTo(0,0);};
+document.getElementById("cfNo").onclick=()=>{document.getElementById("confirm").hidden=true;};
+document.getElementById("cfYes").onclick=()=>{
+  try{speechSynthesis.cancel()}catch(e){}
+  try{localStorage.removeItem("esther-profile");}catch(e){}
+  T=null;S.aud=null;S.langSrc=null;S.locSrc=null;S.lang=null;S.city=null;S.status=null;S.done={};S.postal=null;S.geo=null;S.ui=UI_EN;S.uiTr=UI_EN;S.phases=null;S.phasesTr=null;applyStatic();
+  STATUS.forEach(s=>{delete s.tt;delete s.ts;});
+  document.getElementById("confirm").hidden=true; window.scrollTo(0,0); screenWelcome();
+};
+
+// ================= Office helper: two-way translator for use at a service counter =================
+const LNAME=()=>{const n=L().n; return n.includes("(")?n.slice(n.indexOf("(")+1,-1):n;};
+function openOffice(){
+  try{speechSynthesis.cancel()}catch(e){} track(d=>{d.office++;});
+  const o=document.getElementById("officeUi"); const lg=L(); const isEn=(S.lang||"en").startsWith("en");
+  const tr=(S.uiTr||UI_EN).phrases||UI_EN.phrases;
+  o.innerHTML=`<div class="oi-in">
+    <div class="sheet-h"><span class="ic">${svg("lang")}</span><h3 id="oiT">${esc(u("officeTitle"))}</h3><button class="close" id="oiClose" type="button">${esc(u("close"))} ×</button></div>
+    <p class="sub" style="text-align:start">${esc(u("officeSub"))}</p>
+    ${isEn?`<p class="note">${esc(u("officeEn"))}</p>`:""}
+    <div class="seg oi-mode" role="group" aria-label="${esc(ua("officeTitle"))}">
+      <button type="button" id="mMe" aria-pressed="true">${esc(lg.n)} → English</button>
+      <button type="button" id="mStaff" aria-pressed="false">English → ${esc(lg.n)}</button>
+    </div>
+    <form id="oiForm" class="oi-form">
+      <label class="vh" for="oiIn">${esc(ua("typeHere"))}</label>
+      <textarea id="oiIn" rows="3" placeholder="${esc(ua("typeHere"))}"></textarea>
+      <div class="row" style="justify-content:flex-start">
+        <button class="mic" id="oiMic" type="button" aria-label="${esc(ua("sayIt"))}">${svg("mic",2)}</button>
+        <button class="btn" type="submit">${esc(u("translate"))}</button>
+      </div>
+      <p class="heard" id="oiHeard"></p>
+    </form>
+    <div id="oiOut" hidden>
+      <div class="oi-card staff"><small id="oiOutLbl"></small><p id="oiOutTxt" class="big"></p><p id="oiSrcTxt" class="src"></p>
+        <button class="btn ghost" id="oiPlay" type="button">${svg("speak",2).replace('<svg','<svg style="width:18px;height:18px;vertical-align:-3px"')} ${esc(u("play"))}</button></div>
+    </div>
+    <h4>${esc(u("phrasesL"))}</h4>
+    <div class="oi-phrases">${UI_EN.phrases.map((en,i)=>`<button class="oi-ph" type="button" data-i="${i}"><b>${esc(en)}</b>${isEn?"":`<span lang="${lg.c}">${esc(tr[i]||"")}</span>`}</button>`).join("")}</div>
+    <p class="small" style="margin-top:1rem">${esc(u("officeNote"))}</p>
+  </div>`;
+  o.hidden=false; document.getElementById("oScrim").hidden=false;
+  let mode="me"; const setMode=m=>{mode=m; document.getElementById("mMe").setAttribute("aria-pressed",String(m==="me")); document.getElementById("mStaff").setAttribute("aria-pressed",String(m==="staff"));
+    document.getElementById("oiIn").setAttribute("lang", m==="me"?lg.c:"en");};
+  setMode("me");
+  document.getElementById("mMe").onclick=()=>setMode("me");
+  document.getElementById("mStaff").onclick=()=>setMode("staff");
+  document.getElementById("oiClose").onclick=closeOffice;
+  const show=(out,src,toEn)=>{ const box=document.getElementById("oiOut"); box.hidden=false;
+    document.getElementById("oiOutLbl").textContent= toEn? u("showStaff") : u("forYouL")+" · "+lg.n;
+    const t=document.getElementById("oiOutTxt"); t.textContent=out; t.setAttribute("lang",toEn?"en":lg.c); t.dir=(!toEn&&lg.rtl)?"rtl":"ltr";
+    document.getElementById("oiSrcTxt").textContent=src?"("+src+")":"";
+    const play=()=>{ if(!speak(out,toEn?"en-CA":lg.c)) document.getElementById("oiHeard").textContent=ua("noVoice"); };
+    document.getElementById("oiPlay").onclick=play; play(); box.scrollIntoView({block:"nearest"}); };
+  document.querySelectorAll(".oi-ph").forEach(b=>b.onclick=()=>{const i=+b.dataset.i; track(d=>{d.phrases[i]=(d.phrases[i]||0)+1;}); show(UI_EN.phrases[i], isEn?"":tr[i], true);});
+  document.getElementById("oiMic").onclick=e=>listen(e.currentTarget,document.getElementById("oiHeard"),t=>{document.getElementById("oiIn").value=t;},mode==="me"?lg.c:"en-CA");
+  document.getElementById("oiForm").onsubmit=async e=>{e.preventDefault();
+    const text=document.getElementById("oiIn").value.trim(); if(!text) return;
+    const toEn=mode==="me"; const h=document.getElementById("oiHeard");
+    await sampleReady; if(!sample){h.textContent=ua("liveOff");return;}
+    h.textContent="…"; track(d=>{d.translations++;});
+    try{ const r=await sample(`Translate the following ${toEn?"from "+LNAME()+" into plain, simple English":"from English into "+LNAME()+" (BCP-47 "+lg.c+")"}. This is spoken at a government service counter in Ontario, Canada. Keep names like OHIP, SIN, ServiceOntario and Service Canada as they are. Output only the translation.\n\n${text}`,{modelTier:"quick",cache:false});
+      h.textContent=""; show(r.text.trim(), text, toEn);
+    }catch(err){ h.textContent= err&&err.code==="not_granted"? ua("liveDeclined") : ua("liveFail"); }
+  };
+  document.getElementById("oiClose").focus();
+}
+function closeOffice(){ const o=document.getElementById("officeUi"); o.hidden=true; document.getElementById("oScrim").hidden=true; try{speechSynthesis.cancel()}catch(e){} }
+
+// ================= Theme (light / dark, Government of Canada palette) =================
+function isDark(){ const t=A.theme||"auto"; if(t!=="auto") return t==="dark";
+  const dt=document.documentElement.getAttribute("data-theme"); if(dt) return dt==="dark";
+  try{return matchMedia("(prefers-color-scheme: dark)").matches;}catch(e){return false;} }
+function applyTheme(){ document.documentElement.classList.toggle("dark",isDark()); applyCity();
+  document.querySelectorAll("[data-th]").forEach(b=>b.setAttribute("aria-pressed",String((A.theme||"auto")===b.dataset.th)));
+  const tb=document.getElementById("themeBtn"); if(tb) tb.setAttribute("aria-pressed",String(isDark())); }
+try{matchMedia("(prefers-color-scheme: dark)").addEventListener("change",applyTheme);}catch(e){}
+try{new MutationObserver(applyTheme).observe(document.documentElement,{attributes:true,attributeFilter:["data-theme"]});}catch(e){}
+
+// ================= City accent (complements the Canada palette; placeholder colours until each city's brand guide is supplied) =================
+const CITY_BRAND={
+  markham:{light:"#00747A",dark:"#5CC9CF",tag:"One of Canada's most diverse cities"},
+  toronto:{light:"#0B4F8C",dark:"#7FB2E5",tag:"Canada's largest city"},
+  mississauga:{light:"#B5451B",dark:"#F29A75",tag:"Peel Region's largest city"},
+  brampton:{light:"#A2195B",dark:"#EE8BB9",tag:"The Flower City"},
+  vaughan:{light:"#1F5FA8",dark:"#8DB8EA",tag:"In York Region, next to Toronto"},
+  richmondhill:{light:"#2E7D32",dark:"#86CC88",tag:"In York Region, north of Toronto"},
+  other:{light:"#26374A",dark:"#B9CDE4",tag:"Ontario"}
+};
+function applyCity(){ const b=CITY_BRAND[S.city]||CITY_BRAND.other; document.documentElement.style.setProperty("--city",document.documentElement.classList.contains("dark")?b.dark:b.light); }
+
+// ================= Anonymous usage tracking (demo) =================
+// One document per visit in "sessions": language, city, document type, how each was detected, which steps were opened or done,
+// office-helper use. No names, no typed text, no exact location (postal area = first 3 characters only).
+let DB=null; const dbReady=(async()=>{try{DB=window.claude?await window.claude.use("db"):null;}catch(e){DB=null;}})();
+let ANON="anon"; try{ANON=localStorage.getItem("esther-anon")||("d"+Math.random().toString(36).slice(2,10)); localStorage.setItem("esther-anon",ANON);}catch(e){}
+let T=null, tTimer=null, tBusy=false, tDirty=false;
+function track(fn){
+  if(!T){ T={id:ANON+"-"+Date.now().toString(36), d:{device:ANON,started:Date.now(),opened:{},done:{},phrases:{},office:0,translations:0,asks:0,demo:false}}; }
+  fn(T.d); T.d.updated=Date.now(); T.d.aud=S.aud||null; T.d.lang=S.lang||null; T.d.city=S.city||null; T.d.status=S.status||null;
+  T.d.langSrc=S.langSrc||"manual"; T.d.locSrc=S.locSrc||"manual"; T.d.fsa=S.postal?S.postal.slice(0,3):null;
+  T.d.doneCount=Object.keys(T.d.done).length;
+  clearTimeout(tTimer); tTimer=setTimeout(flush,800);
+}
+async function flush(){ if(tBusy){tDirty=true;return;} await dbReady; if(!DB||!T) return; tBusy=true;
+  try{ await DB.collection("sessions").doc(T.id).set(T.d); }catch(e){}
+  tBusy=false; if(tDirty){tDirty=false;flush();} }
+
+// ================= Demo insights page (#insights) =================
+const STEP_NAMES=Object.fromEntries(buildSteps("markham").concat(buildSeniorSteps("markham")).flatMap(p=>p.steps).map(s=>[s.id,s.t]));
+const LANG_NAMES=Object.fromEntries(LANGS.map(l=>[l.c,l.n]));
+const STATUS_NAMES=Object.fromEntries(STATUS.concat(WHO).map(s=>[s.id,s.t]));
+const PHR=UI_EN.phrases;
+let insExamples=true;
+function tally(rows,f){const m={}; rows.forEach(r=>{const v=f(r); (Array.isArray(v)?v:[v]).forEach(k=>{if(k!=null&&k!=="") m[k]=(m[k]||0)+1;});}); return Object.entries(m).sort((a,b)=>b[1]-a[1]);}
+function bars(title,sub,list,name,total){
+  if(!list.length) return `<section class="ins-card"><h2>${esc(title)}</h2><p class="small">${esc(sub)}</p><p class="small">No data yet.</p></section>`;
+  const max=list[0][1];
+  return `<section class="ins-card"><h2>${esc(title)}</h2><p class="small">${esc(sub)}</p><ol class="bars">${list.slice(0,8).map(([k,v])=>`<li><span class="bl">${esc(name?name(k):k)}</span><span class="bt"><span class="bf" style="width:${Math.max(4,v/max*100)}%"></span></span><span class="bv">${v}${total?` · ${Math.round(v/total*100)}%`:""}</span></li>`).join("")}</ol></section>`;
+}
+async function warmAll(){
+  const btn=document.getElementById("warm"), msg=document.getElementById("warmMsg"); btn.disabled=true;
+  const jobs=[]; LANGS.filter(l=>!l.c.startsWith("en")).forEach(l=>{jobs.push(()=>uiJob(l.c)); ["newcomer","senior"].forEach(a=>jobs.push(()=>stepsJob(l.c,a,"markham")));});
+  let done=0, ok=0; const total=jobs.length; msg.textContent=`0 of ${total} ready`;
+  const run=async()=>{ while(jobs.length){ const j=jobs.shift(); const r=await j(); done++; if(r) ok++; msg.textContent=`${done} of ${total} done${ok<done?` (${done-ok} to retry)`:""}`; } };
+  await Promise.all([run(),run(),run()]);
+  msg.textContent= ok===total?`All ${total} language packs are ready for everyone.`:`${ok} of ${total} ready. Press again to retry the rest.`; btn.disabled=false;
+}
+async function screenInsights(){
+  document.body.className=""; document.documentElement.dir="ltr";
+  app.innerHTML=`<div class="wrap"><p class="small"><a href="#" id="insBack">← Back to the guide</a></p>
+    <h1>Esther demo insights</h1>
+    <p class="note"><b>Demo only.</b> Anonymous usage from this demo page: no names, no typed questions, no exact locations. Postal codes are kept to the first three characters.</p>
+    <label class="tog" for="insEx"><input type="checkbox" id="insEx" ${insExamples?"checked":""}> Include example data (marked as examples, for the demo)</label>
+    <div id="ins"><p class="small">Loading…</p></div></div>`;
+  document.getElementById("insBack").onclick=e=>{e.preventDefault(); try{history.replaceState(null,"",location.pathname+location.search);}catch(err){} boot();};
+  document.getElementById("insEx").onchange=e=>{insExamples=e.target.checked;screenInsights();};
+  await dbReady; const box=document.getElementById("ins");
+  if(!DB){ box.innerHTML=`<p class="note">The insights store isn't available in this view. Open the page in claude.ai while signed in to see the data.</p>`; return; }
+  let rows=[]; try{ const snap=await DB.collection("sessions").limit(1000).get(); rows=snap.docs.map(d=>d.data()).filter(Boolean); }catch(e){ box.innerHTML=`<p class="note">Couldn't load the data. Try again in a moment.</p>`; return; }
+  const live=rows.filter(r=>!r.demo).length; setTimeout(()=>{const w=document.getElementById("warm"); if(w) w.onclick=warmAll;},0); if(!insExamples) rows=rows.filter(r=>!r.demo);
+  const n=rows.length, devices=new Set(rows.map(r=>r.device)).size;
+  const office=rows.filter(r=>(r.office||0)>0).length;
+  const avgDone=n?(rows.reduce((a,r)=>a+(r.doneCount||0),0)/n).toFixed(1):"0";
+  const opened=tally(rows,r=>Object.keys(r.opened||{})), done=tally(rows,r=>Object.keys(r.done||{}));
+  const doneMap=Object.fromEntries(done);
+  const stuck=opened.map(([k,v])=>[k,Math.round((1-(doneMap[k]||0)/v)*100)]).filter(x=>x[1]>0).sort((a,b)=>b[1]-a[1]);
+  box.innerHTML=`
+    <div class="kpis">
+      <div class="kpi"><b>${n}</b><span>Visits</span></div>
+      <div class="kpi"><b>${devices}</b><span>Unique devices</span></div>
+      <div class="kpi"><b>${tally(rows,r=>r.lang).length}</b><span>Languages used</span></div>
+      <div class="kpi"><b>${n?Math.round(office/n*100):0}%</b><span>Used the translator</span></div>
+      <div class="kpi"><b>${avgDone}</b><span>Steps done per visit</span></div>
+    </div>
+    <p class="small">${live} real visit${live===1?"":"s"} recorded from this page so far${insExamples?", plus example data":""}.</p>
+    <div class="ins-grid">
+      ${bars("Newcomer or senior","Which journey each visitor chose.",tally(rows,r=>r.aud||"newcomer"),k=>({newcomer:"Newcomer services",senior:"Senior services"})[k]||k,n)}
+      ${bars("Most common languages","Language each visitor chose.",tally(rows,r=>r.lang),k=>LANG_NAMES[k]||k,n)}
+      ${bars("Services most in need","Steps people opened. A proxy for demand.",opened,k=>STEP_NAMES[k]||k)}
+      ${bars("Where people get stuck","Share of people who opened a step but haven't marked it done.",stuck.map(([k,v])=>[k,v]),k=>STEP_NAMES[k]||k)}
+      ${bars("Document type (newcomers)","Which immigration document newcomers said they hold.",tally(rows.filter(r=>(r.aud||"newcomer")==="newcomer"),r=>r.status),k=>STATUS_NAMES[k]||k)}
+      ${bars("Who seniors' services are for","Seniors themselves, family caregivers, or seniors new to Canada.",tally(rows.filter(r=>r.aud==="senior"),r=>r.status),k=>STATUS_NAMES[k]||k)}
+      ${bars("Cities","Where visitors are landing.",tally(rows,r=>r.city),k=>(CITIES[k]||{}).n||k,n)}
+      ${bars("Postal areas","First three characters of postal codes entered.",tally(rows,r=>r.fsa),null,n)}
+      ${bars("Phrases shown to staff","Translator quick phrases used most.",tally(rows,r=>Object.keys(r.phrases||{})),k=>PHR[+k]||k)}
+      ${bars("How language was set","Detected from the phone, or chosen by hand.",tally(rows,r=>r.langSrc),k=>({device:"Detected from phone",manual:"Chosen by hand"})[k]||k,n)}
+      ${bars("How location was set","Phone location, postal code, time zone or chosen by hand.",tally(rows,r=>r.locSrc),k=>({gps:"Phone location",postal:"Postal code",tz:"Time zone (province)",manual:"Chosen by hand"})[k]||k,n)}
+    </div>
+    <section class="ins-card"><h2>Make other languages instant</h2><p class="small">Translates the whole guide into every language once and shares it with all visitors, so no one waits. Takes a few minutes; keep this page open.</p><div class="row" style="justify-content:flex-start;margin-top:.6rem"><button class="btn" id="warm" type="button">Prepare all languages</button></div><p class="small" id="warmMsg" aria-live="polite"></p></section>
+    <p class="small">In production this would feed a reporting dashboard for funders and partner agencies, with consent wording on the first screen and data kept in Canada.</p>`;
+}
+
+document.querySelectorAll("[data-th]").forEach(b=>b.onclick=()=>{A.theme=b.dataset.th;applyA();applyTheme();});
+document.getElementById("themeBtn").onclick=()=>{A.theme=isDark()?"light":"dark";applyA();applyTheme();};
+applyTheme();
+document.getElementById("officeBtn").onclick=openOffice;
+document.getElementById("oScrim").onclick=closeOffice;
+
+// ================= Boot =================
+async function boot(){ if(S.lang&&S.aud&&S.city&&S.status){ await loadLanguage(); screenHome(false); } else screenWelcome(); }
+window.addEventListener("hashchange",()=>{ if(location.hash==="#insights") screenInsights(); });
+if(location.hash==="#insights") screenInsights(); else boot();
+</script>
